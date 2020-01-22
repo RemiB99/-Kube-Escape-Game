@@ -1,5 +1,5 @@
 sceneSetups:
-- path: Assets/Scenes/Start scene.unity
+- path: Assets/Scenes/the last revelation 3.unity
   isLoaded: 1
   isActive: 1
   isSubScene: 0

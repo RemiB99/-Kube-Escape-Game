@@ -30,13 +30,20 @@ public class ClickObject : MonoBehaviour
                     }
                     else if(hit.transform.name == "Pass MS")
                     {
-                        SceneManager.LoadScene("the last revelation");
+                        SceneManager.LoadScene("the last revelation 1");
                     }
                     else if (hit.transform.name == "Pass Initial")
                     {
                         SceneManager.LoadScene("Start scene");
                     }
-
+                    else if (hit.transform.name == "Zone_coffre")
+                    {
+                        SceneManager.LoadScene("the last revelation 2");
+                    }
+                    else if (hit.transform.name == "Zone_crystal")
+                    {
+                        SceneManager.LoadScene("the last revelation 3");
+                    }
                 }
             }
         }
