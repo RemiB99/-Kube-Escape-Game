@@ -39,10 +39,6 @@ public class ClickObject : MonoBehaviour
                     {
                         SceneManager.LoadScene("the last revelation 1");
                     }
-                    else if (hit.transform.name == "Pass Initial")
-                    {
-                        SceneManager.LoadScene("Start scene");
-                    }
                     else if (hit.transform.name == "BookEnigma")
                     {
                         SceneManager.LoadScene("qcm");
@@ -50,6 +46,10 @@ public class ClickObject : MonoBehaviour
                     else if (hit.transform.name == "Zone_crystal")
                     {
                         SceneManager.LoadScene("the last revelation 3");
+                    }
+                    else if (hit.transform.name == "door")
+                    {
+                        SceneManager.LoadScene("Start scene");
                     }
                     
                 }
