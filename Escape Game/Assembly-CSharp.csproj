@@ -72,6 +72,7 @@
      <Compile Include="Assets\Scripts\JoystickControler.cs" />
      <Compile Include="Assets\Scripts\PickableObject.cs" />
      <Compile Include="Assets\Scripts\SelectionManager.cs" />
+     <Compile Include="Assets\Scripts\StartingVideo.cs" />
      <Compile Include="Assets\Scripts\Swiping.cs" />
      <Compile Include="Assets\Scripts\TouchManager.cs" />
      <None Include="Assets\environment\Room\Settings\Note.txt" />
