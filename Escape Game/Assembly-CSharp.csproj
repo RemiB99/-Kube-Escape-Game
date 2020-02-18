@@ -76,6 +76,7 @@
     <Compile Include="Assets\Joystick Pack\Scripts\Joysticks\FixedJoystick.cs" />
     <Compile Include="Assets\Joystick Pack\Scripts\Joysticks\FloatingJoystick.cs" />
     <Compile Include="Assets\Joystick Pack\Scripts\Joysticks\VariableJoystick.cs" />
+    <Compile Include="Assets\Scripts\CameraSwitch.cs" />
     <Compile Include="Assets\Scripts\CharacterControler.cs" />
     <Compile Include="Assets\Scripts\ClickObject.cs" />
     <Compile Include="Assets\Scripts\Hacker.cs" />
