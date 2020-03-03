@@ -9,21 +9,21 @@ public class ClickObject : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if((Input.touchCount > 0)|| (Input.GetMouseButtonDown(0)))
+        if(/*(Input.touchCount > 0)||*/ (Input.GetMouseButtonDown(0)))
         {
             
-            Touch touch = Input.GetTouch(0) ;
-            Ray rayTouch = Camera.main.ScreenPointToRay(touch.position);
+           // Touch touch = Input.GetTouch(0) ;
+            //Ray rayTouch = Camera.main.ScreenPointToRay(touch.position);
             
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             
             RaycastHit hit;
             
             
-            if( (Physics.Raycast(ray, out hit)) || (Physics.Raycast(rayTouch, out hit)))
+            if( (Physics.Raycast(ray, out hit)) /*|| (Physics.Raycast(rayTouch, out hit))*/)
             {
-                Debug.Log("ray ok");
-                if (Input.GetMouseButtonDown(0) || touch.tapCount == 2 )
+                
+                if (Input.GetMouseButtonDown(0) /*|| touch.tapCount == 2*/ )
                 {
                 
                     if (hit.transform.name == "Cube Test")
@@ -36,7 +36,7 @@ public class ClickObject : MonoBehaviour
                     }
                     else if (hit.transform.name == "Enigma")
                     {
-                        SceneManager.LoadScene("qcm");
+                        //SceneManager.LoadScene("qcm");
                     }
                     else if (hit.transform.name == "Zone_crystal")
                     {
@@ -48,7 +48,7 @@ public class ClickObject : MonoBehaviour
                     }
                     else if (hit.transform.name == "Black Cube")
                     {
-                        Debug.Log("black cube");
+                       
                         SceneManager.LoadScene("Starting video");
                     }
                     else if (hit.transform.name == "Quit")
