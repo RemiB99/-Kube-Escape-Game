@@ -27,7 +27,7 @@ public class HandScript : MonoBehaviour
 
             if ((Physics.Raycast(ray, out hit))) /* || (Physics.Raycast(rayTouch, out hit)))*/
             {
-                if (hit.transform.name == "Main")
+                if (hit.transform.name == "Hand")
                 {
                     //GameObject Main = hit.transform.gameObject;
                     //Main.GetComponent<Animator>().Play("AnimationHand");
@@ -35,6 +35,7 @@ public class HandScript : MonoBehaviour
                     //Main.GetComponent<Animation>().Play("AnimationHand");
 
                     anim.SetTrigger("Active");
+                    //Debug.Log("Test");
                 }
             }
         }

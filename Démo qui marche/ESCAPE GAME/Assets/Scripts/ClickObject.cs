@@ -51,7 +51,7 @@ public class ClickObject : MonoBehaviour
                     {  
                         SceneManager.LoadScene("Starting video");
                     }
-                    else if (hit.transform.name == "Main")
+                    else if (hit.transform.name == "Hand")
                     {
                         Invoke("StartingVideo", 2);
                     }
