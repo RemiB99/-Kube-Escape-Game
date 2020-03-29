@@ -24,16 +24,16 @@ public class BookLibrary : MonoBehaviour
     {
         
 
-
+        // Livre de chimie sur la table
         GameObject book = GameObject.Find("EnigmaChimie");
         
         if (book == null && !hasAppeared){
             
            
             Invoke("revealBook",delay);
-            Invoke("playAuraBook",6);
-            Invoke("startAnim",8);
-            Invoke("exit",14);
+            Invoke("playAuraBook",10);
+            Invoke("startAnim",12);
+            Invoke("exit",18);
             hasAppeared = true;
             
         }
@@ -44,7 +44,7 @@ public class BookLibrary : MonoBehaviour
             
     }   
 
-    // Actions sur le livre chimie
+    
     void revealBook(){
         Light light = bookConcerned.GetComponentInChildren<Light>();
         light.GetComponent<AudioSource>().Play();

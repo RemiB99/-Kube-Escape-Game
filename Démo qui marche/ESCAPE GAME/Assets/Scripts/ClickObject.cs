@@ -32,6 +32,7 @@ public class ClickObject : MonoBehaviour
                     }
                     else if(hit.transform.name == "Pass MS")
                     {
+                        hit.transform.GetComponent<AudioSource>().Play();
                         SceneManager.LoadScene("the last revelation 1");
                     }
                     else if (hit.transform.name == "Enigma")
