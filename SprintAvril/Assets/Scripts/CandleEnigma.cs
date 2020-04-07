@@ -28,7 +28,7 @@ public class CandleEnigma : MonoBehaviour
                     {
                        candle=hit.transform.gameObject;
                        
-                       //lightOffCandle(candle);
+                       lightOffCandle(candle);
                        
                       
                        
