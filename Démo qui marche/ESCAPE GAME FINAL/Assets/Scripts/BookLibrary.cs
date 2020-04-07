@@ -31,7 +31,7 @@ public class BookLibrary : MonoBehaviour
             
            
             Invoke("revealBook",delay);
-            Invoke("playAuraBook",10);
+            Invoke("playAuraBook",delay);
             Invoke("startAnim",12);
             Invoke("exit",18);
             hasAppeared = true;
