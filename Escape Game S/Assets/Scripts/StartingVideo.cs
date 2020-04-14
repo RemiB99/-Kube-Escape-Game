@@ -16,7 +16,7 @@ public class StartingVideo : MonoBehaviour
  
     void CheckOver(UnityEngine.Video.VideoPlayer vp)
     {
-         Debug.Log("Video Is Over");
+         
          SceneManager.LoadScene("Start scene");
     }
 

@@ -26,7 +26,16 @@ public class JoystickControler : MonoBehaviour
         rigibody.velocity = transform.TransformDirection(rigibody.velocity);
         transform.Rotate(Vector3.up * joystick.Horizontal * Time.deltaTime * 10f * speed);
         
-
+        
         
     }
+   
+   /* void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.name == "Player(Clone)")
+        {
+            Debug.Log("Collisin");
+            
+        }
+    }*/
 }

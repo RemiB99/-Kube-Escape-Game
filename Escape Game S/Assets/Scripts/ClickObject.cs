@@ -5,6 +5,10 @@ using UnityEngine.SceneManagement;
 
 public class ClickObject : MonoBehaviour
 {
+    private Inventory inventory;
+    //public Animator transition;
+    
+    
 
     // Update is called once per frame
     void Update()
@@ -12,7 +16,7 @@ public class ClickObject : MonoBehaviour
         if(/*(Input.touchCount > 0)||*/ (Input.GetMouseButtonDown(0)))
         {
             
-           // Touch touch = Input.GetTouch(0) ;
+            //Touch touch = Input.GetTouch(0) ;
             //Ray rayTouch = Camera.main.ScreenPointToRay(touch.position);
             
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -22,34 +26,44 @@ public class ClickObject : MonoBehaviour
             
             if( (Physics.Raycast(ray, out hit)) /*|| (Physics.Raycast(rayTouch, out hit))*/)
             {
-                
-                if (Input.GetMouseButtonDown(0) /*|| touch.tapCount == 2*/ )
+                Debug.Log("ray ok");
+                if (Input.GetMouseButtonDown(0) /*|| touch.tapCount == 2 */)
                 {
                 
                     if (hit.transform.name == "Cube Test")
                     {
                         SceneManager.LoadScene("Terminal Hacker 1");
+                        
                     }
                     else if(hit.transform.name == "Pass MS")
                     {
                         SceneManager.LoadScene("the last revelation 1");
+                        //StartCoroutine(LoadScene("the last revelation 1"));   
+                    }
+                    else if (hit.transform.name == "Pass World Portal")
+                    {
+                        SceneManager.LoadScene("the last revelation 1");
+                        //StartCoroutine(LoadScene("the last revelation 1"));   
                     }
                     else if (hit.transform.name == "Enigma")
                     {
-                        //SceneManager.LoadScene("qcm");
+                        SceneManager.LoadScene("qcm");
+                        //StartCoroutine(LoadScene("qcm"));
                     }
                     else if (hit.transform.name == "Zone_crystal")
                     {
                         SceneManager.LoadScene("the last revelation 3");
+                        //StartCoroutine(LoadScene("the last revelation 1"));
                     }
                     else if (hit.transform.name == "door")
                     {
                         SceneManager.LoadScene("Start scene");
+                        //StartCoroutine(LoadScene("Start scene"));
                     }
                     else if (hit.transform.name == "Black Cube")
-                    {
-                       
+                    {   
                         SceneManager.LoadScene("Starting video");
+                        //StartCoroutine(LoadScene("the last revelation 1"));
                     }
                     else if (hit.transform.name == "Quit")
                     {
@@ -60,4 +74,15 @@ public class ClickObject : MonoBehaviour
             }
         }
     }
+
+   /* IEnumerator LoadScene(string sceneName)
+    {
+        
+        transition.SetTrigger("start");
+        
+        yield return new WaitForSeconds(1.5f);
+
+        SceneManager.LoadScene(sceneName);
+        
+    }*/
 }
