@@ -13,7 +13,7 @@ public class BookAction : MonoBehaviour
     {
         //DistinctBook2 = GameObject.Find("DistinctBook2");
         //DistinctBook2.SetActive(false);
-        Debug.Log(this);
+        
         GameObject music = GameObject.Find("chandilerMain");
         AudioSource back = music.GetComponent<AudioSource>();
         back.volume = 0.1f;
