@@ -11,6 +11,9 @@ public class Item : MonoBehaviour
     public Sprite icon;
     public bool playersObject;
     public Text descriptionText;
+    
+    private GameObject AO;
+    private Image ActiveObject;
 
     [HideInInspector] public bool occupied;
     [HideInInspector] public bool pickedUp;
@@ -19,9 +22,14 @@ public class Item : MonoBehaviour
     [HideInInspector] public GameObject livre1;
     [HideInInspector] public GameObject itemManager;
 
-    void Update()
+     void Start()
     {
-        
+        AO = GameObject.Find("Active Object");
+        ActiveObject = AO.GetComponent<Image>();  
+    }
+
+    void Update()
+    { 
         itemManager = GameObject.FindWithTag("ItemManager");
         if (!playersObject)
         {
@@ -31,7 +39,6 @@ public class Item : MonoBehaviour
                 if (itemManager.transform.GetChild(i).gameObject.GetComponent<Item>().id == id)
                 {
                     livre = itemManager.transform.GetChild(i).gameObject;
-                    
                 }
             }
         }
@@ -52,28 +59,29 @@ public class Item : MonoBehaviour
                     occupied = true;
                 }
             }
-            
+
             if (!livre.GetComponent<Item>().equipped && !occupied)
             {
                 livre.SetActive(true);
                 livre.GetComponent<Item>().equipped = true;
                 descriptionText.text = livre.GetComponent<Item>().description;
+                ActiveObject.color = new Color(255, 255, 255, 255);
+                ActiveObject.sprite = livre.GetComponent<Item>().icon;    
             }
-            else 
-            {     
+            else
+            {
                 descriptionText.text = "vous avez les mains libres, vous pouvez prendre un objet de votre inventaire";
-                
-                if(occupied && !livre.GetComponent<Item>().equipped)
+                ActiveObject.color = new Color(255, 255, 255, 0);
+
+                if (occupied && !livre.GetComponent<Item>().equipped)
                 {
                     descriptionText.text = "vous portez déjà un objet !";
-                }
-
+                    ActiveObject.color = new Color(255, 255, 255, 255);
+                }   
                 livre.SetActive(false);
                 livre.GetComponent<Item>().equipped = false;
                 occupied = false;
-
             }
-            
         }
     }
 }

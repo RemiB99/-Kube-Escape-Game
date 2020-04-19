@@ -480,7 +480,7 @@ MonoBehaviour:
   id: 2
   type: 
   description: ceci est une copie
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: 11277a3f23988ec47908362d708edaa8, type: 3}
   playersObject: 0
   descriptionText: {fileID: 0}
   occupied: 0
@@ -518,7 +518,7 @@ MonoBehaviour:
   id: 1
   type: 
   description: ceci est un livre
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: e9d4143c19529834981ac6821a04aecd, type: 3}
   playersObject: 0
   descriptionText: {fileID: 0}
   occupied: 0
