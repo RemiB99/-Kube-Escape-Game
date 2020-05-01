@@ -25,7 +25,7 @@ public class FinAnimation : MonoBehaviour
         
         transition.transform.GetChild(0).gameObject.SetActive(true);
         yield return new WaitForSeconds(transitionTime);
-        transition.SetTrigger("StartFonduFin");
+        //transition.SetTrigger("StartFonduFin");
         
         //SceneManager.LoadScene(levelIndex);
     }

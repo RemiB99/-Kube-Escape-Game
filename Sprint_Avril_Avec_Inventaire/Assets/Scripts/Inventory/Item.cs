@@ -70,12 +70,12 @@ public class Item : MonoBehaviour
             }
             else
             {
-                descriptionText.text = "vous avez les mains libres, vous pouvez prendre un objet de votre inventaire";
+                descriptionText.text = "Vous avez les mains libres, vous pouvez prendre un objet de votre inventaire";
                 ActiveObject.color = new Color(255, 255, 255, 0);
 
                 if (occupied && !livre.GetComponent<Item>().equipped)
                 {
-                    descriptionText.text = "vous portez déjà un objet !";
+                    descriptionText.text = "Vous portez déjà un objet !";
                     ActiveObject.color = new Color(255, 255, 255, 255);
                 }   
                 livre.SetActive(false);

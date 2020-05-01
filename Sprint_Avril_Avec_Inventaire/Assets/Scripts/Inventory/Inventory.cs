@@ -7,6 +7,7 @@ public class Inventory : MonoBehaviour
     public GameObject inventory;
     public GameObject slotHolder;
 
+    public bool hamze = true;
     private bool inventoryEnabled;
     private int allSlots;
     private GameObject[] slot;
@@ -42,19 +43,47 @@ public class Inventory : MonoBehaviour
         }
         if(inventoryEnabled == true)
         {
-            inventory.SetActive(true);
+            //inventory.SetActive(true);
+            inventory.transform.localScale = new Vector3(1, 1, 1);
         }
         else
         {
-            inventory.SetActive(false);
+            inventory.transform.localScale = new Vector3(0, 0, 0);
+            GameObject diams = GameObject.Find("DiamantMain");
+            
+            if( diams != null && hamze){
+                    
+                    diams.GetComponent<AudioSource>().Play();
+
+                    GameObject test = GameObject.Find("Tornade");
+                    test.GetComponent<ParticleSystem>().Play();
+
+                    GameObject image = GameObject.Find("Image");
+                    image.GetComponent<Animator>().SetTrigger("FonduFDM");
+                    hamze = false;
+            }
+
         }
         if (Input.GetMouseButtonDown(0)) {
             if (Physics.Raycast(ray, out hit)){
+                
                 if (hit.transform.tag == "Item") {
                     //Debug.Log(hit.transform.name);
+                    
                     GameObject itemPickedUp = hit.transform.gameObject;
+                    itemPickedUp.transform.parent.GetComponent<AudioSource>().Play();
                     Item item = itemPickedUp.GetComponent<Item>();
+
+                    if(itemPickedUp.name == "Diamant"){
+                        itemPickedUp.transform.GetChild(0).gameObject.SetActive(false);
+                        itemPickedUp.transform.GetChild(1).gameObject.SetActive(false);
+                        
+
+                    }
+                    
                     AddItem(itemPickedUp, item.id, item.type, item.description, item.icon);
+                    
+                    
                 }
             } 
         }

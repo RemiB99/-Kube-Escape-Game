@@ -45,7 +45,7 @@ public class ClickObject : MonoBehaviour
                     }
                     else if (hit.transform.name == "door")
                     {
-                        SceneManager.LoadScene("Start scene");
+                        //SceneManager.LoadScene("Start scene");
                     }
                     else if (hit.transform.name == "Black Cube")
                     {  

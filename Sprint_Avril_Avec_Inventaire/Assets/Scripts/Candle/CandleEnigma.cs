@@ -33,14 +33,12 @@ public class CandleEnigma : MonoBehaviour
                     lightOffCandle(candle);
                     
                     if(codeBon() && !hasMoved){
-                        Debug.Log("********************");
-                        GameObject bookCase = GameObject.Find("bookcaseMove");
-                        Animator bookcaseReveal = bookCase.GetComponent<Animator>();
-                        bookcaseReveal.SetTrigger("MoveBookCase");
-                        //bookConcerned.GetComponent<AudioSource>().Play();
-                        hasMoved = true;
+                        
+                        animBiblio();
                     }
                 }
+                
+                
         }
     }
 
@@ -92,6 +90,26 @@ public class CandleEnigma : MonoBehaviour
         for(int i=0;i<test.Length-1;i++){
             Debug.Log(test[i]);
         }
+    }
+
+    void animBiblio(){
+        GameObject bookCase = GameObject.Find("bookCaseMoveLeft");
+        GameObject bookCase2 = GameObject.Find("bookCaseMoveRight");
+        
+        Animator bookcaseReveal = bookCase.GetComponent<Animator>();
+        Animator bookcaseReveal2 = bookCase2.GetComponent<Animator>();
+        bookcaseReveal.SetTrigger("BookCaseLeftMove");
+        bookcaseReveal2.SetTrigger("BookCaseRightMove");
+
+        GameObject contour = GameObject.Find("ContourLivre");
+        contour.GetComponent<Outline>().enabled = true;
+
+        //AudioSource test = bookCase.GetComponent<AudioSource>();
+        bookCase.GetComponent<AudioSource>().Play();
+        //bookCase.GetComponent<AudioSource>().enabled = false;
+
+        hasMoved = true;
+
     }
 
     void animCandleWall(GameObject candle){
