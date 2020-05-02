@@ -35,7 +35,9 @@ public class CoffreScript : MonoBehaviour
 
     void testDiams(){
         GameObject diams = GameObject.Find("Diamant");
-        diams.GetComponent<BoxCollider>().enabled = true;
+        if(diams != null){
+            diams.GetComponent<BoxCollider>().enabled = true;
+        }
         
     }
 }

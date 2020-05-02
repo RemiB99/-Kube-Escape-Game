@@ -12,7 +12,22 @@ public class LinkObjects : MonoBehaviour
     private GameObject Description;
     private GameObject Slot;
     private GameObject panel;
+    private GameObject objetCliqué;
 
+    private string[] textesBouche = new string[20];
+    private GameObject bouche;
+
+
+    void Start(){
+
+        textesBouche[1] = "Bon sang ! Un livre si précieux ! Comment osez-vous !";
+        textesBouche[2] = "Quel  acte  irresponsable ! Réfléchissez un peu...";
+        textesBouche[3] = "Très bon choix... Espérons que cela continue !";
+        textesBouche[4] = "Félicitations ! Utilisez la à bon escient, les conséquences pourraient être fatales";
+
+        bouche = GameObject.Find("Bouches");
+
+    }
     // Update is called once per frame
     void Update()
     {
@@ -22,20 +37,22 @@ public class LinkObjects : MonoBehaviour
             RaycastHit hit;
             if ((Physics.Raycast(ray, out hit)))
             {
+                objetCliqué = hit.transform.gameObject;
                 if (hit.transform.gameObject.tag =="LinkObject" )
                 {
                     itemManager = GameObject.FindWithTag("ItemManager");
                     int allItems = itemManager.transform.childCount;
                     for (int i = 0; i < allItems; i++)
                     {
+                        
+                        
                         obj = itemManager.transform.GetChild(i).gameObject;  
                         SlotHolder = GameObject.Find("Slot Holder");
                         Description = GameObject.Find("Description");
+                        
 
-                        if (itemManager.transform.GetChild(i).gameObject.GetComponent<Item>().id == id && itemManager.transform.GetChild(i).gameObject.GetComponent<Item>().equipped)
+                        if (itemManager.transform.GetChild(i).gameObject.GetComponent<Item>().id == hit.transform.gameObject.GetComponent<LinkObjects>().id && itemManager.transform.GetChild(i).gameObject.GetComponent<Item>().equipped)
                         {
-                            
-                            
                             destroyImage();
                             /*for (int j = 0; j < SlotHolder.transform.childCount; j++)
                             {
@@ -60,26 +77,32 @@ public class LinkObjects : MonoBehaviour
                         }
                         else if (itemManager.transform.GetChild(i).gameObject.GetComponent<Item>().equipped){
                             
-                            //son a mettre buzz que colin cherche
                             
                             
-                            if(obj.name=="BookInvisibleMain" && this.name=="ActiveFeu"){
+                            
+                            if(obj.name=="BookInvisibleMain" && objetCliqué.name=="ActiveFeu"){
                                 
                                 GameObject anim = GameObject.Find("FeuRouge");
                                 anim.GetComponent<AudioSource>().Play();
                                 ParticleSystem test = anim.GetComponent<ParticleSystem>();
                                 test.Play();
+
+                                bouche.GetComponent<Bouches>().animBoucheFache();
+                                bouche.GetComponent<Bouches>().setText(textesBouche[1]);
+
                                 destroyImage();
-                                
                                 Destroy(obj);
                             }
 
-                            if(obj.name=="BookVieMain" && this.name=="ActiveFeu"){
+                            if(obj.name=="BookVieMain" && objetCliqué.name=="ActiveFeu"){
                                 
                                 GameObject anim = GameObject.Find("FeuRouge2");
                                 anim.GetComponent<AudioSource>().Play();
                                 ParticleSystem test = anim.GetComponent<ParticleSystem>();
                                 test.Play();
+
+                                bouche.GetComponent<Bouches>().animBoucheFache();
+                                bouche.GetComponent<Bouches>().setText(textesBouche[2]);
                                 destroyImage();
                                 Destroy(obj);
                             }
@@ -109,33 +132,41 @@ public class LinkObjects : MonoBehaviour
             Animator potion = potionJaune.GetComponent<Animator>();
             potion.SetTrigger("PotionJaune");
             
-            this.GetComponent<AudioSource>().Play();
+            objetCliqué.GetComponent<AudioSource>().Play();
             
             GameObject tab = GameObject.Find("TextPotion");
-            tab.SetActive(false);
+            if(tab!=null)
+                tab.SetActive(false);
+
+            bouche.GetComponent<Bouches>().animBoucheContente();
+            bouche.GetComponent<Bouches>().setText(textesBouche[3]);
         }
 
         if (obj.name == "PotionRougeMain")
         {
-            Animator blueOrange = this.GetComponent<Animator>();
-            this.GetComponent<AudioSource>().Play();
+            Animator blueOrange = objetCliqué.GetComponent<Animator>();
+            objetCliqué.GetComponent<AudioSource>().Play();
             blueOrange.SetTrigger("PotionBleue1");
-            id = 6;    
+            objetCliqué.GetComponent<LinkObjects>().id = 6;    
         }
 
         if (obj.name == "PotionJauneMain")
         {
-            Animator OrangeWhite = this.GetComponent<Animator>();
-            this.GetComponent<AudioSource>().Play();
+            Animator OrangeWhite = objetCliqué.GetComponent<Animator>();
+            objetCliqué.GetComponent<AudioSource>().Play();
             OrangeWhite.SetTrigger("PotionBleue2");
+
+            bouche.GetComponent<Bouches>().animBoucheContente();
+            bouche.GetComponent<Bouches>().setText(textesBouche[4]);
             Invoke("waitPotion",2);
             
         }
 
         if (obj.name == "PotionBleueMain")
         {
-            Animator Bramble = this.GetComponent<Animator>();
-            this.GetComponent<AudioSource>().Play();
+
+            Animator Bramble = objetCliqué.GetComponent<Animator>();
+            objetCliqué.GetComponent<AudioSource>().Play();
             Bramble.SetTrigger("Bramble");
             Invoke("destroyBramble",2);
             
@@ -166,11 +197,13 @@ public class LinkObjects : MonoBehaviour
     }
 
     public void waitPotion(){
-        this.tag = "Item";
+        objetCliqué.tag = "Item";
+        objetCliqué.GetComponent<Outline>().enabled=true;
     }
 
     public void destroyBramble(){
         GameObject bramble = GameObject.Find("StrangeFlower");
-        bramble.SetActive(false);
+        if(bramble!=null)
+            bramble.SetActive(false);
     }
 }

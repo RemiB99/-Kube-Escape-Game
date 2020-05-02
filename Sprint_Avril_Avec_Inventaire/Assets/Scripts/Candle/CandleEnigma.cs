@@ -35,6 +35,9 @@ public class CandleEnigma : MonoBehaviour
                     if(codeBon() && !hasMoved){
                         
                         animBiblio();
+                        GameObject bouche = GameObject.Find("Bouches");
+                        bouche.GetComponent<Bouches>().animBoucheContente();
+                        bouche.GetComponent<Bouches>().setText("Bien joué ! Allons voir ce que ces bibliothèques nous cachaient...");
                     }
                 }
                 

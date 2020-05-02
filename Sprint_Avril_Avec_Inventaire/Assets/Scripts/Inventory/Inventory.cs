@@ -7,12 +7,15 @@ public class Inventory : MonoBehaviour
     public GameObject inventory;
     public GameObject slotHolder;
 
-    public bool hamze = true;
+    
+
+    public bool estPassé = true;
     private bool inventoryEnabled;
     private int allSlots;
     private GameObject[] slot;
 
-    
+    private string[] textesBouche = new string[20];
+    private GameObject bouche;
 
     void Start()
     {
@@ -30,6 +33,13 @@ public class Inventory : MonoBehaviour
                 slot[i].SetActive(false);
             }
         }
+
+        textesBouche[1] = "Vous avez recupéré un objet, consultez-le dans votre inventaire pour en apprendre plus";
+        textesBouche[2] = "Aïe aïe aïe... Elle ne se laissera pas faire si facilement...";
+        textesBouche[3] = "Ne touchez pas à ça malheureux ! Cela pourrait être dangereux...";
+        textesBouche[4] = "Je vous l'avait dit ! Ce diamant est maudit ! ";
+
+        bouche = GameObject.Find("Bouches");
     }
     void Update()
     {
@@ -47,12 +57,17 @@ public class Inventory : MonoBehaviour
             inventory.transform.localScale = new Vector3(1, 1, 1);
         }
         else
-        {
+        {//Inventaire fermé
+
             inventory.transform.localScale = new Vector3(0, 0, 0);
             GameObject diams = GameObject.Find("DiamantMain");
             
-            if( diams != null && hamze){
+            //Cinématique Fin du Monde
+            if( diams != null && estPassé){
                     
+                    bouche.GetComponent<Bouches>().animBoucheFache();
+                    bouche.GetComponent<Bouches>().setText(textesBouche[4]);
+
                     diams.GetComponent<AudioSource>().Play();
 
                     GameObject test = GameObject.Find("Tornade");
@@ -60,15 +75,26 @@ public class Inventory : MonoBehaviour
 
                     GameObject image = GameObject.Find("Image");
                     image.GetComponent<Animator>().SetTrigger("FonduFDM");
-                    hamze = false;
+                    estPassé = false;
             }
 
         }
         if (Input.GetMouseButtonDown(0)) {
             if (Physics.Raycast(ray, out hit)){
-                
+                if(hit.transform.name == "StrangeFlower" && GameObject.Find("PotionBleueMain")== null){
+                    
+                    bouche.GetComponent<Bouches>().animBoucheTriste();
+                    bouche.GetComponent<Bouches>().setText(textesBouche[2]);
+                }
+
+                if(hit.transform.name == "PotionVerte" || hit.transform.name == "PotionViolette"){
+                    
+                    bouche.GetComponent<Bouches>().animBoucheFache();
+                    bouche.GetComponent<Bouches>().setText(textesBouche[3]);
+                }
+
                 if (hit.transform.tag == "Item") {
-                    //Debug.Log(hit.transform.name);
+                    //Recupération d'objet inventaire
                     
                     GameObject itemPickedUp = hit.transform.gameObject;
                     itemPickedUp.transform.parent.GetComponent<AudioSource>().Play();
@@ -77,13 +103,18 @@ public class Inventory : MonoBehaviour
                     if(itemPickedUp.name == "Diamant"){
                         itemPickedUp.transform.GetChild(0).gameObject.SetActive(false);
                         itemPickedUp.transform.GetChild(1).gameObject.SetActive(false);
-                        
-
                     }
+
+                    /*if(itemPickedUp.name == "PotionRouge"){
+                        
+                        bouche.GetComponent<Bouches>().animBoucheContente();
+                        bouche.GetComponent<Bouches>().setText(textesBouche[1]);
+                        
+                    }*/
                     
+                    bouche.GetComponent<Bouches>().animBoucheContente();
+                    bouche.GetComponent<Bouches>().setText(textesBouche[1]);
                     AddItem(itemPickedUp, item.id, item.type, item.description, item.icon);
-                    
-                    
                 }
             } 
         }
