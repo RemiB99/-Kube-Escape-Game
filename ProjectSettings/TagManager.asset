@@ -5,6 +5,10 @@ TagManager:
   serializedVersion: 2
   tags:
   - Selectable
+  - Item
+  - ItemManager
+  - PlayerClone
+  - PlayerCamera
   layers:
   - Default
   - TransparentFX
