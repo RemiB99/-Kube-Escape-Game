@@ -7,8 +7,7 @@ using UnityEngine.SceneManagement;
 public class Qcm : MonoBehaviour
 {
     
-    //public GameObject goodAnswer;
-    //public GameObject wrongAnswer;
+    
     
     public void choiceGoodAnswer()
     {

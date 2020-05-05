@@ -9,10 +9,10 @@ public class ClickObject : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if((Input.touchCount > 0)|| (Input.GetMouseButtonDown(0)))
+        if(/*(Input.touchCount > 0)||*/ (Input.GetMouseButtonDown(0)))
         {
             
-            //Touch touch = Input.GetTouch(0) ;
+           // Touch touch = Input.GetTouch(0) ;
             //Ray rayTouch = Camera.main.ScreenPointToRay(touch.position);
             
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -20,12 +20,10 @@ public class ClickObject : MonoBehaviour
             RaycastHit hit;
             
             
-            if( (Physics.Raycast(ray, out hit)) //|| (Physics.Raycast(rayTouch, out hit))
-                )
+            if( (Physics.Raycast(ray, out hit)) /*|| (Physics.Raycast(rayTouch, out hit))*/)
             {
-                Debug.Log("ray ok");
-                if (Input.GetMouseButtonDown(0) //|| touch.tapCount == 2 
-                    )
+                
+                if (Input.GetMouseButtonDown(0) /*|| touch.tapCount == 2*/ )
                 {
                 
                     if (hit.transform.name == "Cube Test")
@@ -34,11 +32,12 @@ public class ClickObject : MonoBehaviour
                     }
                     else if(hit.transform.name == "Pass MS")
                     {
+                        hit.transform.GetComponent<AudioSource>().Play();
                         SceneManager.LoadScene("the last revelation 1");
                     }
                     else if (hit.transform.name == "Enigma")
                     {
-                        SceneManager.LoadScene("qcm");
+                        //SceneManager.LoadScene("qcm");
                     }
                     else if (hit.transform.name == "Zone_crystal")
                     {
@@ -47,13 +46,17 @@ public class ClickObject : MonoBehaviour
                     else if (hit.transform.name == "door")
                     {
                         SceneManager.LoadScene("Start scene");
+                        SceneManager.sceneLoaded += OnSceneLoaded;
                     }
                     else if (hit.transform.name == "Black Cube")
-                    {
-                        Debug.Log("black cube");
+                    {  
                         SceneManager.LoadScene("Starting video");
                     }
-                    else if (hit.transform.name == "Quit")
+                    else if (hit.transform.name == "Hand")
+                    {
+                        Invoke("StartingVideo", 2);
+                    }
+                    else if (hit.transform.name == "rpgpp_lt_rock_01")
                     {
                         Application.Quit();
                     }
@@ -61,5 +64,15 @@ public class ClickObject : MonoBehaviour
                 }
             }
         }
+    }
+
+    void StartingVideo()
+    {
+        SceneManager.LoadScene("Starting video");
+    }
+
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        ItemSaveManager.LoadItems("slotsSave");
     }
 }

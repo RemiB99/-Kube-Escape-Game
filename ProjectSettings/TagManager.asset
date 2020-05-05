@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - Selectable
+  - ItemManager
+  - Item
+  - LinkObject
   layers:
   - Default
   - TransparentFX
@@ -14,7 +17,7 @@ TagManager:
   - UI
   - 
   - 
-  - 
+  - Glow
   - 
   - 
   - 

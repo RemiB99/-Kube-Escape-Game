@@ -5,15 +5,18 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Starting Scenes/Black scene.unity
     guid: d6331404481d8ea4095ca8b0d82dcb26
   - enabled: 1
+    path: Assets/Scenes/Starting Scenes/HandScene.unity
+    guid: bf75249889ddd9046b0d3e21e4c75a62
+  - enabled: 1
     path: Assets/Scenes/Starting Scenes/Starting video.unity
     guid: dae17dd0748305f4fbcdfe48db5b7202
-  - enabled: 1
-    path: Assets/Scenes/SampleScene.unity
-    guid: 9fc0d4010bbf28b4594072e72b8655ab
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
   - enabled: 1
     path: Assets/Scenes/SwipingCameraScene.unity
     guid: b06f29657f14c7a428ab116e0385a7c4
