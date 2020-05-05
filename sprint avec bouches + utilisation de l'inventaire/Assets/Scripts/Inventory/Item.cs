@@ -24,7 +24,7 @@ public class Item : MonoBehaviour
     [HideInInspector] public GameObject livre1;
     [HideInInspector] public GameObject itemManager;
 
-     void Start()
+    void Start()
     {
         AO = GameObject.Find("Active Object");
         ActiveObject = AO.GetComponent<Image>();  
@@ -51,8 +51,8 @@ public class Item : MonoBehaviour
     {
         //c'est la où nous allons gérer les type
 
-        if(type == "Livre")
-        {
+        //if(type == "Livre")
+        //{
             
             for (int i = 0; i < itemManager.transform.childCount; i++)
             {
@@ -86,6 +86,6 @@ public class Item : MonoBehaviour
                 livre.GetComponent<Item>().equipped = false;
                 occupied = false;
             }
-        }
+        //}
     }
 }

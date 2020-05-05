@@ -39,10 +39,10 @@ public class Bouches : MonoBehaviour
     { 
         if(inventaire.transform.localScale == new Vector3(0, 0, 0)){
             if(!reflechi){
-                textBouche.SetActive(true);
+                /*textBouche.SetActive(true);
                 setText("Cette fumée rose ne me dit rien qui vaille... Ces plantes semblent bien protéger le contenu de ce coffre...");
                 animBoucheReflechi();
-                reflechi = true;
+                reflechi = true;*/
 
             }
         //textBouche.SetActive(true);

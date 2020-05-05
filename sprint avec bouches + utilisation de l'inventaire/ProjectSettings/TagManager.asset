@@ -8,6 +8,7 @@ TagManager:
   - ItemManager
   - Item
   - LinkObject
+  - Contour
   layers:
   - Default
   - TransparentFX

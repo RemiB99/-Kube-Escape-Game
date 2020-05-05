@@ -60,7 +60,7 @@ public class Inventory : MonoBehaviour
         {//Inventaire fermé
 
             inventory.transform.localScale = new Vector3(0, 0, 0);
-            GameObject diams = GameObject.Find("DiamantMain");
+            /*GameObject diams = GameObject.Find("DiamantMain");
             
             //Cinématique Fin du Monde
             if( diams != null && estPassé){
@@ -76,7 +76,7 @@ public class Inventory : MonoBehaviour
                     GameObject image = GameObject.Find("Image");
                     image.GetComponent<Animator>().SetTrigger("FonduFDM");
                     estPassé = false;
-            }
+            }*/
 
         }
         if (Input.GetMouseButtonDown(0)) {
@@ -105,6 +105,12 @@ public class Inventory : MonoBehaviour
                         itemPickedUp.transform.GetChild(1).gameObject.SetActive(false);
                     }
 
+                    if(itemPickedUp.GetComponent<Item>().type == "LivreCycle"){
+                        /* string nom = itemPickedUp.name.Substring(5);
+                        itemPickedUp.GetComponent<Transform>().position =GameObject.Find("Contour"+nom).GetComponent<Transform>().position;
+                        itemPickedUp.GetComponent<Transform>().Rotate(0,0,90);*/
+                    }
+                    
                     /*if(itemPickedUp.name == "PotionRouge"){
                         
                         bouche.GetComponent<Bouches>().animBoucheContente();
@@ -123,6 +129,7 @@ public class Inventory : MonoBehaviour
 
     public void AddItem(GameObject itemObject, int itemId, string itemType, string itemDescription, Sprite itemIcon, string itemUse)
     {
+        
         for(int i =0; i < allSlots; i++)
         {
             if (slot[i].GetComponent<Slot>().empty)
@@ -135,13 +142,15 @@ public class Inventory : MonoBehaviour
                 slot[i].GetComponent<Slot>().description = itemDescription;
                 slot[i].GetComponent<Slot>().id = itemId;
                 slot[i].GetComponent<Slot>().use = itemUse;
-
-                itemObject.transform.parent = slot[i].transform;
+                
+                //itemObject.transform.parent = slot[i].transform;
                 itemObject.SetActive(false);
+                
 
                 slot[i].GetComponent<Slot>().UpdateSlot();
                 slot[i].GetComponent<Slot>().empty = false;
                 slot[i].SetActive(true);
+                
                 return;
             }
             

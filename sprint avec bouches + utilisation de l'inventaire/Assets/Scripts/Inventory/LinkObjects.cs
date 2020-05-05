@@ -39,7 +39,7 @@ public class LinkObjects : MonoBehaviour
             if ((Physics.Raycast(ray, out hit)))
             {
                 objetCliqué = hit.transform.gameObject;
-                if (hit.transform.gameObject.tag =="LinkObject" )
+                if (hit.transform.gameObject.tag =="LinkObject")
                 {
                     itemManager = GameObject.FindWithTag("ItemManager");
                     int allItems = itemManager.transform.childCount;
@@ -83,7 +83,7 @@ public class LinkObjects : MonoBehaviour
                             
                             
                             
-                            if(obj.name=="BookInvisibleMain" && objetCliqué.name=="ActiveFeu"){
+                            if(obj.name=="BookRecueil"){
                                 
                                 GameObject anim = GameObject.Find("FeuRouge");
                                 anim.GetComponent<AudioSource>().Play();
@@ -97,18 +97,7 @@ public class LinkObjects : MonoBehaviour
                                 Destroy(obj);
                             }
 
-                            if(obj.name=="BookVieMain" && objetCliqué.name=="ActiveFeu"){
-                                
-                                GameObject anim = GameObject.Find("FeuRouge2");
-                                anim.GetComponent<AudioSource>().Play();
-                                ParticleSystem test = anim.GetComponent<ParticleSystem>();
-                                test.Play();
-
-                                bouche.GetComponent<Bouches>().animBoucheFache();
-                                bouche.GetComponent<Bouches>().setText(textesBouche[2]);
-                                destroyImage();
-                                Destroy(obj);
-                            }
+                            
 
 
                         }
@@ -150,7 +139,7 @@ public class LinkObjects : MonoBehaviour
             Animator blueOrange = objetCliqué.GetComponent<Animator>();
             objetCliqué.GetComponent<AudioSource>().Play();
             blueOrange.SetTrigger("PotionBleue1");
-            objetCliqué.GetComponent<LinkObjects>().id = 6;    
+            objetCliqué.GetComponent<LinkObjects>().id = 2;    
         }
 
         if (obj.name == "PotionJauneMain")
