@@ -9,6 +9,7 @@ public class CycleVScript : MonoBehaviour
     public GameObject[] bookTemp = new GameObject[5];
     public GameObject[] bookTab = new GameObject[5];
     public GameObject[] textBook = new GameObject[5];
+    public GameObject[] objetsARecup = new GameObject[5];
 
     public GameObject inventaire;
 
@@ -70,6 +71,17 @@ public class CycleVScript : MonoBehaviour
 
                             
                         }
+                        /*else if(livresPosés()){
+                            GameObject canvas = GameObject.Find("Canvas");
+                            for(int i=0;i<5;i++){
+                                canvas.GetComponent<Inventory>().AddItem(objetsARecup[i],
+                                                                        objetsARecup[i].id,
+                                                                        objetsARecup[i].type,
+                                                                        objetsARecup[i].description,
+                                                                        objetsARecup[i].icon,
+                                                                        objetsARecup[i].use);
+                            }
+                        }*/
                     }
                 }
             }
@@ -97,6 +109,11 @@ public class CycleVScript : MonoBehaviour
         }
         else
             return false;
+    }
+
+    public bool livresPosés(){
+        return bookTemp[0].activeSelf && bookTemp[1].activeSelf && bookTemp[2].activeSelf && bookTemp[3].activeSelf && bookTemp[4].activeSelf;
+        
     }
 
     public GameObject livreInventaire(GameObject livreCourant){

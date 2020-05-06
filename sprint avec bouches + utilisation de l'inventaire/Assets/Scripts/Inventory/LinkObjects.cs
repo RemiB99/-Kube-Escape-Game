@@ -7,7 +7,8 @@ public class LinkObjects : MonoBehaviour
 {
     private GameObject itemManager;
     public int id;
-    private GameObject obj;
+    private GameObject listeObjetsInventaires;
+    private GameObject objMain;
     private GameObject SlotHolder;
     private GameObject Description;
     private GameObject Use;
@@ -28,6 +29,9 @@ public class LinkObjects : MonoBehaviour
 
         bouche = GameObject.Find("Bouches");
 
+        listeObjetsInventaires = GameObject.Find("ObjetsInventaire");
+
+
     }
     // Update is called once per frame
     void Update()
@@ -47,59 +51,22 @@ public class LinkObjects : MonoBehaviour
                     {
                         
                         
-                        obj = itemManager.transform.GetChild(i).gameObject;  
+                        objMain = itemManager.transform.GetChild(i).gameObject;  
                         SlotHolder = GameObject.Find("Slot Holder");
                         Description = GameObject.Find("Description");
                         Use = GameObject.Find("Use");
 
-
-
-                        if (itemManager.transform.GetChild(i).gameObject.GetComponent<Item>().id == hit.transform.gameObject.GetComponent<LinkObjects>().id && itemManager.transform.GetChild(i).gameObject.GetComponent<Item>().equipped)
+                        
+                        if (objMain.GetComponent<Item>().id == objetCliqué.GetComponent<LinkObjects>().id 
+                            && objMain.GetComponent<Item>().equipped
+                            )
                         {
-                            destroyImage();
-                            /*for (int j = 0; j < SlotHolder.transform.childCount; j++)
-                            {
-                                Slot = SlotHolder.transform.GetChild(j).gameObject;
-                                panel = Slot.transform.GetChild(0).gameObject;
-
-                                GameObject Text = Description.transform.GetChild(1).gameObject;
-                                Text.GetComponent<Text>().text = null;
-                                GameObject Image = GameObject.Find("Active Object");
-                                Image.GetComponent<Image>().sprite = null;
-                                
-                                if (obj.GetComponent<Item>().icon == panel.GetComponent<Image>().sprite)
-                                {
-                                    Destroy(Slot);
-                                }
-                                Image.GetComponent<Image>().color = new Color(95,84,80, 255);
-                            }*/
-                            
-                            activeAction();
-                            Destroy(obj);          
-                            
+                            startAction();
                         }
-                        else if (itemManager.transform.GetChild(i).gameObject.GetComponent<Item>().equipped){
-                            
-                            
-                            
-                            
-                            if(obj.name=="BookRecueil"){
-                                
-                                GameObject anim = GameObject.Find("FeuRouge");
-                                anim.GetComponent<AudioSource>().Play();
-                                ParticleSystem test = anim.GetComponent<ParticleSystem>();
-                                test.Play();
 
-                                bouche.GetComponent<Bouches>().animBoucheFache();
-                                bouche.GetComponent<Bouches>().setText(textesBouche[1]);
-
-                                destroyImage();
-                                Destroy(obj);
-                            }
-
-                            
-
-
+                        else if(objetCliqué.GetComponent<LinkObjects>().id == 56 && testObjetMainLivresCycle() && objMain.GetComponent<Item>().equipped)
+                        {
+                            startAction();
                         }
                     }
                 }
@@ -109,12 +76,12 @@ public class LinkObjects : MonoBehaviour
 
     public void activeAction()
     {
-        if (obj.name == "CubeInventaire(1)")
+        if (objMain.name == "CubeInventaire(1)")
         {
             Debug.Log("YEEEEES ça marche !!!");
         }
 
-        if (obj.name == "BookDodoMain")
+        if (objMain.name == "BookDodoMain")
         {
             GameObject anim = GameObject.Find("FeuVert");
             ParticleSystem test = anim.GetComponent<ParticleSystem>();
@@ -134,15 +101,15 @@ public class LinkObjects : MonoBehaviour
             bouche.GetComponent<Bouches>().setText(textesBouche[3]);
         }
 
-        if (obj.name == "PotionRougeMain")
+        if (objMain.name == "PotionRougeMain")
         {
             Animator blueOrange = objetCliqué.GetComponent<Animator>();
             objetCliqué.GetComponent<AudioSource>().Play();
             blueOrange.SetTrigger("PotionBleue1");
-            objetCliqué.GetComponent<LinkObjects>().id = 2;    
+            //objetCliqué.GetComponent<LinkObjects>().id = 2;    
         }
 
-        if (obj.name == "PotionJauneMain")
+        if (objMain.name == "PotionJauneMain")
         {
             Animator OrangeWhite = objetCliqué.GetComponent<Animator>();
             objetCliqué.GetComponent<AudioSource>().Play();
@@ -154,7 +121,7 @@ public class LinkObjects : MonoBehaviour
             
         }
 
-        if (obj.name == "PotionBleueMain")
+        if (objMain.name == "PotionBleueMain")
         {
 
             Animator Bramble = objetCliqué.GetComponent<Animator>();
@@ -164,6 +131,8 @@ public class LinkObjects : MonoBehaviour
             
         }
     }
+
+    
 
     public void destroyImage(){
 
@@ -181,7 +150,7 @@ public class LinkObjects : MonoBehaviour
             GameObject use = Use.transform.GetChild(1).gameObject;
             use.GetComponent<Text>().text = null;
 
-            if (obj.GetComponent<Item>().icon == panel.GetComponent<Image>().sprite)
+            if (objMain.GetComponent<Item>().icon == panel.GetComponent<Image>().sprite)
             {
                 Slot.GetComponent<Slot>().empty = true;
                 panel.GetComponent<Image>().sprite = null;
@@ -189,6 +158,8 @@ public class LinkObjects : MonoBehaviour
                 //Destroy(Slot);
             }
             Image.GetComponent<Image>().color = new Color(95,84,80, 255);
+
+            
         }
     }
 
@@ -201,5 +172,33 @@ public class LinkObjects : MonoBehaviour
         GameObject bramble = GameObject.Find("StrangeFlower");
         if(bramble!=null)
             bramble.SetActive(false);
+    }
+
+    public bool testObjetMainLivresCycle(){
+        return objMain.GetComponent<Item>().id == 6 
+            || objMain.GetComponent<Item>().id == 7
+            || objMain.GetComponent<Item>().id == 8
+            || objMain.GetComponent<Item>().id == 9
+            || objMain.GetComponent<Item>().id == 10;
+    }
+
+    public void startAction(){
+        // detruit l'objet dans l'inventaire, met a false celui de la main et a true celui recuperable
+        destroyImage();
+        activeAction();
+                            
+        objMain.GetComponent<Item>().equipped = false;
+        objMain.GetComponent<Item>().occupied = false;
+                            
+                            
+        int allItems2 = listeObjetsInventaires.transform.childCount;
+        for (int j = 0; j < allItems2; j++)
+        {
+            GameObject obj2 = listeObjetsInventaires.transform.GetChild(j).gameObject;
+            if(obj2.GetComponent<Item>().id == objMain.GetComponent<Item>().id) {
+                obj2.SetActive(true);
+            }
+        }
+        objMain.SetActive(false);
     }
 }

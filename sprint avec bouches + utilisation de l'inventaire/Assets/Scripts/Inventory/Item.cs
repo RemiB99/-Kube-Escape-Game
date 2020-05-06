@@ -51,7 +51,7 @@ public class Item : MonoBehaviour
     {
         //c'est la où nous allons gérer les type
 
-        //if(type == "Livre")
+        //if(this.type == "Livre")
         //{
             
             for (int i = 0; i < itemManager.transform.childCount; i++)
@@ -86,6 +86,12 @@ public class Item : MonoBehaviour
                 livre.GetComponent<Item>().equipped = false;
                 occupied = false;
             }
-        //}
-    }
+        }
+        
+
+
+        
+
+        
+    
 }

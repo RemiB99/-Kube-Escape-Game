@@ -1,31 +1,26 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class CandleEnigma : MonoBehaviour
 {
     public GameObject candle;
-    public GameObject book1;
-    public GameObject book2;
-    public GameObject book3;
-    public GameObject book4;
-    public GameObject book5;
+    public GameObject bookConcerned;
     private bool hasMoved = false;
     private bool[] candlesAnswer = new bool[13];
     private bool[] candlesScene = new bool[13];
     private CandleEnigma scriptWall;
+
+    private string[] textesBouche = new string[20];
+    private GameObject bouche;
     // Start is called before the first frame update
     void Start()
     {
         initializeTab();
         GameObject globalCandle = GameObject.Find("CandleWall13");
         scriptWall = globalCandle.GetComponent<CandleEnigma>();
-        
-        book1 = GameObject.Find("BookRecueil");
-        book2 = GameObject.Find("BookConception");
-        book3 = GameObject.Find("BookCode");
-        book4 = GameObject.Find("BookTests");
-        book5 = GameObject.Find("BookMaintenance");
         
     }
 
@@ -34,28 +29,47 @@ public class CandleEnigma : MonoBehaviour
     {
         if((Input.GetMouseButtonDown(0)))
         {
+            
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
             
-            if( (Physics.Raycast(ray, out hit)))
-                if (hit.transform.name == candle.transform.name){
+            if( (Physics.Raycast(ray, out hit))){
+
+                GameObject clic = hit.transform.gameObject;
+                GameObject itemManager = GameObject.FindWithTag("ItemManager");
+                int allItems = itemManager.transform.childCount;
+                for (int i = 0; i < allItems; i++){
+                    GameObject objCourant = itemManager.transform.GetChild(i).gameObject;
+                    Item scriptObjCourant = objCourant.GetComponent<Item>();
+                
+                    if (bookConcerned == objCourant && scriptObjCourant.equipped && clic.name == "TableauBougie"){
                     
-                    
-                    lightOffCandle(candle);
-                    
-                    if(codeBon() && !hasMoved){
                         
-                        animBiblio();
-                        revealBooks();
-                        GameObject bouche = GameObject.Find("Bouches");
-                        bouche.GetComponent<Bouches>().animBoucheContente();
-                        bouche.GetComponent<Bouches>().setText("Bien joué ! Allons voir ce que ces bibliothèques nous cachaient...");
+                        lightOffCandle(candle);
+                        objCourant.SetActive(false);
+                        //enelever de l'inventaire
+                    
+                        if(codeBon() && !hasMoved){
                         
+                            animBiblio();
+                            revealBooks();
+                            GameObject bouche = GameObject.Find("Bouches");
+                            bouche.GetComponent<Bouches>().animBoucheContente();
+                            bouche.GetComponent<Bouches>().setText("Bien joué ! Allons voir ce que ces bibliothèques nous cachaient...");
+                        
+                        }
                     }
+
+                    else if(bookConcerned == null && scriptObjCourant.equipped && clic.name == "TableauBougie"){
+
+
+                    }
+                
+                
                 }
-                
-                
+            }
         }
+    
     }
 
     void initializeTab(){
@@ -86,6 +100,7 @@ public class CandleEnigma : MonoBehaviour
         light.enabled = !light.enabled;
         mesh.enabled = !mesh.enabled;
         candle.GetComponent<AudioSource>().Play();
+        candle.transform.GetChild(3).gameObject.GetComponent<MeshRenderer>().enabled = true;
         }
     }
 
@@ -127,25 +142,7 @@ public class CandleEnigma : MonoBehaviour
     }
 
     void revealBooks(){
-        book1.GetComponent<MeshRenderer>().enabled = true;
-        book1.GetComponent<BoxCollider>().enabled = true;
-        book1.GetComponent<Outline>().enabled = true;
 
-        book2.GetComponent<MeshRenderer>().enabled = true;
-        book2.GetComponent<BoxCollider>().enabled = true;
-        book2.GetComponent<Outline>().enabled = true;
-
-        book3.GetComponent<MeshRenderer>().enabled = true;
-        book3.GetComponent<BoxCollider>().enabled = true;
-        book3.GetComponent<Outline>().enabled = true;
-
-        book4.GetComponent<MeshRenderer>().enabled = true;
-        book4.GetComponent<BoxCollider>().enabled = true;
-        book4.GetComponent<Outline>().enabled = true;
-
-        book5.GetComponent<MeshRenderer>().enabled = true;
-        book5.GetComponent<BoxCollider>().enabled = true;
-        book5.GetComponent<Outline>().enabled = true;
 
         GameObject.Find("PotionVerte").GetComponent<Outline>().enabled = true;
         GameObject.Find("PotionViolette").GetComponent<Outline>().enabled = true;

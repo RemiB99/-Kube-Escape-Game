@@ -81,11 +81,11 @@ public class Inventory : MonoBehaviour
         }
         if (Input.GetMouseButtonDown(0)) {
             if (Physics.Raycast(ray, out hit)){
-                if(hit.transform.name == "StrangeFlower" && GameObject.Find("PotionBleueMain")== null){
+                /*if(hit.transform.name == "StrangeFlower" && GameObject.Find("PotionBleueMain")== null){
                     
                     bouche.GetComponent<Bouches>().animBoucheTriste();
                     bouche.GetComponent<Bouches>().setText(textesBouche[2]);
-                }
+                }*/
 
                 if(hit.transform.name == "PotionVerte" || hit.transform.name == "PotionViolette"){
                     
@@ -142,6 +142,7 @@ public class Inventory : MonoBehaviour
                 slot[i].GetComponent<Slot>().description = itemDescription;
                 slot[i].GetComponent<Slot>().id = itemId;
                 slot[i].GetComponent<Slot>().use = itemUse;
+                
                 
                 //itemObject.transform.parent = slot[i].transform;
                 itemObject.SetActive(false);
