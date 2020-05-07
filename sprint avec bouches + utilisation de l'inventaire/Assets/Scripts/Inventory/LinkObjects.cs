@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class LinkObjects : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class LinkObjects : MonoBehaviour
     public int id;
     private GameObject listeObjetsInventaires;
     private GameObject objMain;
+    private GameObject objRecuperable;
     private GameObject SlotHolder;
     private GameObject Description;
     private GameObject Use;
@@ -22,8 +24,8 @@ public class LinkObjects : MonoBehaviour
 
     void Start(){
 
-        textesBouche[1] = "Bon sang ! Un livre si précieux ! Comment osez-vous !";
-        textesBouche[2] = "Quel  acte  irresponsable ! Réfléchissez un peu...";
+        textesBouche[1] = " : Hmmmm...Croyez vous vraiment que cela représente une étape clé du cycle de vie d'un logiciel";
+        textesBouche[2] = " : Très bon choix ! C'est une étape importante dans le cycle de vie d'un logiciel ! Bien joué !";
         textesBouche[3] = "Très bon choix... Espérons que cela continue !";
         textesBouche[4] = "Félicitations ! Utilisez la à bon escient, les conséquences pourraient être fatales";
 
@@ -37,14 +39,17 @@ public class LinkObjects : MonoBehaviour
     void Update()
     {
         if ((Input.GetMouseButtonDown(0)))
-        {
+        {   
+            
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
             if ((Physics.Raycast(ray, out hit)))
             {
+                
                 objetCliqué = hit.transform.gameObject;
                 if (hit.transform.gameObject.tag =="LinkObject")
                 {
+                    
                     itemManager = GameObject.FindWithTag("ItemManager");
                     int allItems = itemManager.transform.childCount;
                     for (int i = 0; i < allItems; i++)
@@ -57,16 +62,34 @@ public class LinkObjects : MonoBehaviour
                         Use = GameObject.Find("Use");
 
                         
+                        
                         if (objMain.GetComponent<Item>().id == objetCliqué.GetComponent<LinkObjects>().id 
                             && objMain.GetComponent<Item>().equipped
                             )
                         {
-                            startAction();
+                            startAction(true);
                         }
 
                         else if(objetCliqué.GetComponent<LinkObjects>().id == 56 && testObjetMainLivresCycle() && objMain.GetComponent<Item>().equipped)
-                        {
-                            startAction();
+                        { // cas des livres sur mur Cycle en V
+                            startAction(true);
+                            PlaceLivreMurCycle();
+                        }
+
+                        else if(objetCliqué.GetComponent<LinkObjects>().id == 50 && testObjetMainLivresCycle() && objMain.GetComponent<Item>().equipped)
+                        { // cas des bons livres sur la validation (Activité 1)
+                            startAction(false);
+                            
+                        }
+                        
+                        
+                        else if(objetCliqué.GetComponent<LinkObjects>().id == 50 && testObjetMainLivresMauvais() && objMain.GetComponent<Item>().equipped)
+                        { // cas des mauvais livres sur la validation (Activité 1)
+                            destroyObjMainAndScene();
+                            
+                            bouche.GetComponent<Bouches>().animBoucheFache();
+                            string nomLivre = objMain.transform.GetChild(0).gameObject.GetComponent<TextMeshPro>().text;
+                            bouche.GetComponent<Bouches>().setText(nomLivre + textesBouche[1]);
                         }
                     }
                 }
@@ -81,24 +104,60 @@ public class LinkObjects : MonoBehaviour
             Debug.Log("YEEEEES ça marche !!!");
         }
 
-        if (objMain.name == "BookDodoMain")
+        if (objMain.name == "BookRecueilMain")
         {
-            GameObject anim = GameObject.Find("FeuVert");
-            ParticleSystem test = anim.GetComponent<ParticleSystem>();
-            test.Play();
+            string nomLivre = objMain.transform.GetChild(0).gameObject.GetComponent<TextMeshPro>().text;
+            GameObject candle = GameObject.Find("CandleTest04");
+            if(!candle.GetComponent<CandleEnigma>().isAlive){
+                candle.GetComponent<CandleEnigma>().lightOffCandle(candle);
+                bouche.GetComponent<Bouches>().animBoucheContente();
+                bouche.GetComponent<Bouches>().setText(nomLivre + textesBouche[2]);
+            }
+        
+        }
 
-            GameObject potionJaune = GameObject.Find("PotionJaune");
-            Animator potion = potionJaune.GetComponent<Animator>();
-            potion.SetTrigger("PotionJaune");
-            
-            objetCliqué.GetComponent<AudioSource>().Play();
-            
-            GameObject tab = GameObject.Find("TextPotion");
-            if(tab!=null)
-                tab.SetActive(false);
+        if (objMain.name == "BookConceptionMain")
+        {
+            string nomLivre = objMain.transform.GetChild(0).gameObject.GetComponent<TextMeshPro>().text;
+            GameObject candle = GameObject.Find("CandleTest03");
+            if(!candle.GetComponent<CandleEnigma>().isAlive){
+                candle.GetComponent<CandleEnigma>().lightOffCandle(candle);
+                bouche.GetComponent<Bouches>().animBoucheContente();
+                bouche.GetComponent<Bouches>().setText(nomLivre + textesBouche[2]);
+            }
+        }
 
-            bouche.GetComponent<Bouches>().animBoucheContente();
-            bouche.GetComponent<Bouches>().setText(textesBouche[3]);
+        if (objMain.name == "BookCodeMain")
+        {
+            string nomLivre = objMain.transform.GetChild(0).gameObject.GetComponent<TextMeshPro>().text;
+            GameObject candle = GameObject.Find("CandleTest05");
+            if(!candle.GetComponent<CandleEnigma>().isAlive){
+                candle.GetComponent<CandleEnigma>().lightOffCandle(candle);
+                bouche.GetComponent<Bouches>().animBoucheContente();
+                bouche.GetComponent<Bouches>().setText(nomLivre + textesBouche[2]);
+            }
+        }
+
+        if (objMain.name == "BookTestsMain")
+        {
+            string nomLivre = objMain.transform.GetChild(0).gameObject.GetComponent<TextMeshPro>().text;
+            GameObject candle = GameObject.Find("CandleTest02");
+            if(!candle.GetComponent<CandleEnigma>().isAlive){
+                candle.GetComponent<CandleEnigma>().lightOffCandle(candle);
+                bouche.GetComponent<Bouches>().animBoucheContente();
+                bouche.GetComponent<Bouches>().setText(nomLivre + textesBouche[2]);
+            }
+        }
+
+        if (objMain.name == "BookMaintenanceMain")
+        {
+            string nomLivre = objMain.transform.GetChild(0).gameObject.GetComponent<TextMeshPro>().text;
+            GameObject candle = GameObject.Find("CandleTest01");
+            if(!candle.GetComponent<CandleEnigma>().isAlive){
+                candle.GetComponent<CandleEnigma>().lightOffCandle(candle);
+                bouche.GetComponent<Bouches>().animBoucheContente();
+                bouche.GetComponent<Bouches>().setText(nomLivre + textesBouche[2]);
+            }
         }
 
         if (objMain.name == "PotionRougeMain")
@@ -163,7 +222,7 @@ public class LinkObjects : MonoBehaviour
         }
     }
 
-    public void waitPotion(){
+    /*public void waitPotion(){
         objetCliqué.tag = "Item";
         objetCliqué.GetComponent<Outline>().enabled=true;
     }
@@ -172,7 +231,7 @@ public class LinkObjects : MonoBehaviour
         GameObject bramble = GameObject.Find("StrangeFlower");
         if(bramble!=null)
             bramble.SetActive(false);
-    }
+    }*/
 
     public bool testObjetMainLivresCycle(){
         return objMain.GetComponent<Item>().id == 6 
@@ -182,8 +241,41 @@ public class LinkObjects : MonoBehaviour
             || objMain.GetComponent<Item>().id == 10;
     }
 
-    public void startAction(){
+    public bool testObjetMainLivresMauvais(){
+        return objMain.GetComponent<Item>().id == 11 
+            || objMain.GetComponent<Item>().id == 12
+            || objMain.GetComponent<Item>().id == 13
+            || objMain.GetComponent<Item>().id == 14
+            || objMain.GetComponent<Item>().id == 15;
+    }
+
+    public void startAction(bool destroyObjInventaire){
         // detruit l'objet dans l'inventaire, met a false celui de la main et a true celui recuperable
+
+
+        if(destroyObjInventaire)
+            destroyImage();
+        activeAction();
+                            
+        objMain.GetComponent<Item>().equipped = false;
+        objMain.GetComponent<Item>().occupied = false;
+                            
+                            
+        int allItems2 = listeObjetsInventaires.transform.childCount;
+        for (int j = 0; j < allItems2; j++)
+        {
+            objRecuperable = listeObjetsInventaires.transform.GetChild(j).gameObject;
+            if(objRecuperable.GetComponent<Item>().id == objMain.GetComponent<Item>().id) {
+                objRecuperable.SetActive(true);
+                objMain.SetActive(false);
+                return;
+            }
+        }
+        
+    }
+
+    public void destroyObjMainAndScene(){
+        // detruit l'objet dans l'inventaire, l'objet dans la main et celui recuperable
         destroyImage();
         activeAction();
                             
@@ -194,11 +286,25 @@ public class LinkObjects : MonoBehaviour
         int allItems2 = listeObjetsInventaires.transform.childCount;
         for (int j = 0; j < allItems2; j++)
         {
-            GameObject obj2 = listeObjetsInventaires.transform.GetChild(j).gameObject;
-            if(obj2.GetComponent<Item>().id == objMain.GetComponent<Item>().id) {
-                obj2.SetActive(true);
+            objRecuperable = listeObjetsInventaires.transform.GetChild(j).gameObject;
+            if(objRecuperable.GetComponent<Item>().id == objMain.GetComponent<Item>().id) {
+                Destroy(objRecuperable);
+                Destroy(objMain);
+                return;
             }
         }
-        objMain.SetActive(false);
+        
+    }
+
+    public void PlaceLivreMurCycle(){
+        // replace livre sur mur cycle en V à l'endroit cliqué
+        
+        
+        objRecuperable.GetComponent<Transform>().position = objetCliqué.GetComponent<Transform>().position;
+        objetCliqué.transform.GetChild(0).gameObject.GetComponent<TextMeshPro>().text = objMain.transform.GetChild(0).GetComponent<TextMeshPro>().text;
+        //objetCliqué.transform.GetChild(0).gameObject.GetComponent<MeshRenderer>().enabled = true;
+        //objRecuperable.GetComponent<Transform>().Rotate(0,0,90);
+        //objRecuperable.SetActive(true);
+        
     }
 }

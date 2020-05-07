@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class Inventory : MonoBehaviour
 {
@@ -16,6 +18,8 @@ public class Inventory : MonoBehaviour
 
     private string[] textesBouche = new string[20];
     private GameObject bouche;
+
+
 
     void Start()
     {
@@ -81,48 +85,37 @@ public class Inventory : MonoBehaviour
         }
         if (Input.GetMouseButtonDown(0)) {
             if (Physics.Raycast(ray, out hit)){
-                /*if(hit.transform.name == "StrangeFlower" && GameObject.Find("PotionBleueMain")== null){
+                if(!EventSystem.current.IsPointerOverGameObject()){
+                    /*if(hit.transform.name == "StrangeFlower" && GameObject.Find("PotionBleueMain")== null){
                     
                     bouche.GetComponent<Bouches>().animBoucheTriste();
                     bouche.GetComponent<Bouches>().setText(textesBouche[2]);
                 }*/
 
-                if(hit.transform.name == "PotionVerte" || hit.transform.name == "PotionViolette"){
+                    if(hit.transform.name == "PotionVerte" || hit.transform.name == "PotionViolette"){
                     
-                    bouche.GetComponent<Bouches>().animBoucheFache();
-                    bouche.GetComponent<Bouches>().setText(textesBouche[3]);
-                }
-
-                if (hit.transform.tag == "Item") {
-                    //Recupération d'objet inventaire
-                    
-                    GameObject itemPickedUp = hit.transform.gameObject;
-                    itemPickedUp.transform.parent.GetComponent<AudioSource>().Play();
-                    Item item = itemPickedUp.GetComponent<Item>();
-
-                    if(itemPickedUp.name == "Diamant"){
-                        itemPickedUp.transform.GetChild(0).gameObject.SetActive(false);
-                        itemPickedUp.transform.GetChild(1).gameObject.SetActive(false);
+                        bouche.GetComponent<Bouches>().animBoucheFache();
+                        bouche.GetComponent<Bouches>().setText(textesBouche[3]);
                     }
 
-                    if(itemPickedUp.GetComponent<Item>().type == "LivreCycle"){
-                        /* string nom = itemPickedUp.name.Substring(5);
-                        itemPickedUp.GetComponent<Transform>().position =GameObject.Find("Contour"+nom).GetComponent<Transform>().position;
-                        itemPickedUp.GetComponent<Transform>().Rotate(0,0,90);*/
-                    }
+                    if (hit.transform.tag == "Item") {
+                        //Recupération d'objet inventaire
                     
-                    /*if(itemPickedUp.name == "PotionRouge"){
-                        
+                        GameObject itemPickedUp = hit.transform.gameObject;
+                        itemPickedUp.transform.parent.GetComponent<AudioSource>().Play();
+                        Item item = itemPickedUp.GetComponent<Item>();
+
+                        if(itemPickedUp.name == "Diamant"){
+                            itemPickedUp.transform.GetChild(0).gameObject.SetActive(false);
+                            itemPickedUp.transform.GetChild(1).gameObject.SetActive(false);
+                        } 
                         bouche.GetComponent<Bouches>().animBoucheContente();
                         bouche.GetComponent<Bouches>().setText(textesBouche[1]);
-                        
-                    }*/
-                    
-                    bouche.GetComponent<Bouches>().animBoucheContente();
-                    bouche.GetComponent<Bouches>().setText(textesBouche[1]);
-                    AddItem(itemPickedUp, item.id, item.type, item.description, item.icon, item.use);
-                }
-            } 
+                        AddItem(itemPickedUp, item.id, item.type, item.description, item.icon, item.use);
+                    }
+                } 
+            }
+        
         }
     }
 
@@ -145,7 +138,10 @@ public class Inventory : MonoBehaviour
                 
                 
                 //itemObject.transform.parent = slot[i].transform;
+                
                 itemObject.SetActive(false);
+                modifsPositionObject(itemObject);
+                
                 
 
                 slot[i].GetComponent<Slot>().UpdateSlot();
@@ -157,5 +153,11 @@ public class Inventory : MonoBehaviour
             
         }
         return;
+    }
+
+    public void modifsPositionObject(GameObject itemObject){
+        itemObject.GetComponent<Transform>().position = GameObject.Find("Feu").GetComponent<Transform>().position;
+        if(itemObject.GetComponent<Item>().type == "Livre")
+            itemObject.GetComponent<Outline>().enabled = false;
     }
 }

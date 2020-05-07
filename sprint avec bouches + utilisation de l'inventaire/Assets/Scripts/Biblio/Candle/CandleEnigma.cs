@@ -8,9 +8,10 @@ public class CandleEnigma : MonoBehaviour
 {
     public GameObject candle;
     public GameObject bookConcerned;
+    public bool isAlive = false;
     private bool hasMoved = false;
-    private bool[] candlesAnswer = new bool[13];
-    private bool[] candlesScene = new bool[13];
+    //private bool[] candlesAnswer = new bool[5];
+    private bool[] candlesScene = new bool[5];
     private CandleEnigma scriptWall;
 
     private string[] textesBouche = new string[20];
@@ -27,7 +28,7 @@ public class CandleEnigma : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if((Input.GetMouseButtonDown(0)))
+        /*if((Input.GetMouseButtonDown(0)))
         {
             
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -47,7 +48,7 @@ public class CandleEnigma : MonoBehaviour
                         
                         lightOffCandle(candle);
                         objCourant.SetActive(false);
-                        //enelever de l'inventaire
+                        //enelever de l'inventaire*/
                     
                         if(codeBon() && !hasMoved){
                         
@@ -58,55 +59,57 @@ public class CandleEnigma : MonoBehaviour
                             bouche.GetComponent<Bouches>().setText("Bien joué ! Allons voir ce que ces bibliothèques nous cachaient...");
                         
                         }
-                    }
+                    
 
-                    else if(bookConcerned == null && scriptObjCourant.equipped && clic.name == "TableauBougie"){
+                    //else if(bookConcerned == null && scriptObjCourant.equipped && clic.name == "TableauBougie"){
 
 
                     }
                 
                 
-                }
-            }
-        }
+                
+            
+        
     
-    }
+    
 
     void initializeTab(){
-        for(int i=0;i<candlesAnswer.Length;i++){
-            candlesAnswer[i] = false;
+        for(int i=0;i<candlesScene.Length;i++){
             candlesScene[i] = false;
         }
-        candlesAnswer[0] = true;
+        /*candlesAnswer[0] = true;
         candlesAnswer[2] = true;
         candlesAnswer[6] = true;
         candlesAnswer[8] = true;
-        candlesAnswer[10] = true;
+        candlesAnswer[10] = true;*/
 
     }
-    void lightOffCandle(GameObject candle){
+    public void lightOffCandle(GameObject candle){
         
-        
-        
-        if(candle.name != "CandleWall13"){
-
-        //modif tableau bougies
-        string str = candle.transform.name;
-        int number = int.Parse(str.Substring(str.Length - 2));
-        scriptWall.candlesScene[number-1] = !(scriptWall.candlesScene[number-1]);
-
         Light light = candle.GetComponentInChildren<Light>();
         MeshRenderer mesh = candle.GetComponentInChildren<MeshRenderer>();
-        light.enabled = !light.enabled;
-        mesh.enabled = !mesh.enabled;
-        candle.GetComponent<AudioSource>().Play();
-        candle.transform.GetChild(3).gameObject.GetComponent<MeshRenderer>().enabled = true;
+
+        if(candle.name != "CandleWall13"){
+
+            if(!isAlive){
+                //modif tableau bougies
+                string str = candle.transform.name;
+                int number = int.Parse(str.Substring(str.Length - 2));
+                scriptWall.candlesScene[number-1] = !(scriptWall.candlesScene[number-1]);
+
+                
+                light.enabled = !light.enabled;
+                mesh.enabled = !mesh.enabled;
+                candle.GetComponent<AudioSource>().Play();
+                candle.transform.GetChild(3).gameObject.GetComponent<MeshRenderer>().enabled = true;
+                isAlive = true;
+            }
         }
     }
 
     bool codeBon(){
-        for(int i=0;i<candlesAnswer.Length-1;i++){
-            if(candlesAnswer[i] != scriptWall.candlesScene[i])
+        for(int i=0;i<candlesScene.Length;i++){
+            if(!candlesScene[i])
                 return false;
         }
         return true;
@@ -119,22 +122,22 @@ public class CandleEnigma : MonoBehaviour
     }
 
     void animBiblio(){
-        GameObject bookCase = GameObject.Find("bookCaseMoveLeft");
+        //GameObject bookCase = GameObject.Find("bookCaseMoveLeft");
         GameObject bookCase2 = GameObject.Find("bookCaseMoveRight");
-        GameObject bookCase3 = GameObject.Find("bookCaseMove");
+        //GameObject bookCase3 = GameObject.Find("bookCaseMove");
         
-        Animator bookcaseReveal = bookCase.GetComponent<Animator>();
+        //Animator bookcaseReveal = bookCase.GetComponent<Animator>();
         Animator bookcaseReveal2 = bookCase2.GetComponent<Animator>();
-        Animator bookcaseReveal3 = bookCase3.GetComponent<Animator>();
-        bookcaseReveal.SetTrigger("BookCaseLeftMove");
+        //Animator bookcaseReveal3 = bookCase3.GetComponent<Animator>();
+        //bookcaseReveal.SetTrigger("BookCaseLeftMove");
         bookcaseReveal2.SetTrigger("BookCaseRightMove");
-        bookcaseReveal3.SetTrigger("MoveBookCase");
+        //bookcaseReveal3.SetTrigger("MoveBookCase");
 
         //GameObject contour = GameObject.Find("ContourLivre");
         //contour.GetComponent<Outline>().enabled = true;
 
         
-        bookCase.GetComponent<AudioSource>().Play();
+        bookCase2.GetComponent<AudioSource>().Play();
         
 
         hasMoved = true;
