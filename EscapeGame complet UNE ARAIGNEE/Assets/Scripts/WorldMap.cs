@@ -28,12 +28,11 @@ public class WorldMap : MonoBehaviour
         {
             if (!EventSystem.current.IsPointerOverGameObject())
             {
-                if (Input.GetMouseButtonDown(0) && hit.transform.name == "WorldMap")
+                if (Input.GetMouseButtonDown(0) && hit.transform.name == "WorldMap" )
                 {
                     enigme.SetActive(true);
                 }
-            }
-               
+            }     
         }
     }
 

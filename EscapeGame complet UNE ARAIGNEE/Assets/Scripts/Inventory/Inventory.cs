@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 
 public class Inventory : MonoBehaviour
 {
@@ -93,7 +94,7 @@ public class Inventory : MonoBehaviour
                     bouche.GetComponent<Bouches>().animBoucheTriste();
                     bouche.GetComponent<Bouches>().setText(textesBouche[2]);
                 }*/
-
+                    
                     if(hit.transform.name == "PotionVerte" || hit.transform.name == "PotionViolette"){
                     
                         bouche.GetComponent<Bouches>().animBoucheFache();
@@ -155,8 +156,10 @@ public class Inventory : MonoBehaviour
     }
 
     public void modifsPositionObject(GameObject itemObject){
-        itemObject.GetComponent<Transform>().position = GameObject.Find("Feu").GetComponent<Transform>().position;
-
+        if(SceneManager.GetActiveScene().name == "the last revelation 1")
+        {
+            itemObject.GetComponent<Transform>().position = GameObject.Find("Feu").GetComponent<Transform>().position;
             itemObject.GetComponent<Outline>().enabled = false;
+        }    
     }
 }

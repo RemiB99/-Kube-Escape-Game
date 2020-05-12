@@ -55,17 +55,17 @@ public class LinkObjects : MonoBehaviour
                     int allItems = itemManager.transform.childCount;
                     for (int i = 0; i < allItems; i++)
                     {
-                        
-                        
+                       
+
                         objMain = itemManager.transform.GetChild(i).gameObject;  
                         SlotHolder = GameObject.Find("Slot Holder");
                         Description = GameObject.Find("Description");
                         Use = GameObject.Find("Use");
 
+
+
+
                         
-                        
-						
-						
                         if (objMain.GetComponent<Item>().id == objetCliqué.GetComponent<LinkObjects>().id 
                             && objMain.GetComponent<Item>().equipped
                             )
@@ -189,6 +189,31 @@ public class LinkObjects : MonoBehaviour
             Invoke("destroyBramble",2);
             
         }
+
+
+        //*********************************** Taverne******************************************//
+        if(objMain.name == "BackLogFinalMain")
+        {
+            GameObject client = GameObject.Find("Client");
+            client.GetComponent<TextClient>().changeText();
+            GameObject inv = GameObject.Find("Canvas");
+            GameObject planningPokerObjet = GameObject.Find("PlanningPokerObjet");
+            Item ppo = planningPokerObjet.GetComponent<Item>();
+
+            objetCliqué.GetComponent<LinkObjects>().id = 53;
+            inv.GetComponent<Inventory>().AddItem(planningPokerObjet, ppo.id, ppo.type, ppo.description, ppo.icon, ppo.use);
+
+            
+        }
+
+        if (objMain.name == "UserStoriesEvaluesMain")
+        {
+            GameObject client = GameObject.Find("Client");
+            client.GetComponent<TextClient>().changeText();
+            
+        }
+
+        
     }
 
     IEnumerator reactionClient(){

@@ -18,7 +18,13 @@ public class TextClient : MonoBehaviour
     private GameObject[] objetChangemantText;
     private int nbObjets = 1;
     private bool estPassé;
-    // Start is called before the first frame update
+    private bool premierTexteClient;
+
+    // varialbes déroulement du scénario//
+    private GameObject map ;
+    private GameObject BLB ;
+    private GameObject BookCars;
+
     void Start()
     {
         texts = new string[nbTexts];
@@ -26,12 +32,22 @@ public class TextClient : MonoBehaviour
         initTexts();
         findObjetChangementText();
         text = ZoneTextClient.transform.GetChild(0).gameObject;
-        text.GetComponent<Text>().text =  texts[0];
+        text.GetComponent<Text>().text = texts[0];
         textActuel = texts[0];
         ampoule = GameObject.Find("Ampoule");
-        ampoule.SetActive(false);
+        //ampoule.SetActive(false);
         zoneActive = false;
-        estPassé = false;    
+        estPassé = false;
+        premierTexteClient = false;
+
+        // initialisation des variables déroulement du scénario //
+        map = GameObject.Find("WorldMap");
+        BLB = GameObject.Find("BackLogBook");
+        BookCars = GameObject.Find("BookEnigme");
+        
+        BLB.SetActive(false);
+        map.GetComponent<BoxCollider>().enabled = false;
+        BookCars.GetComponent<BoxCollider>().enabled = false;
     }
 
     // Update is called once per frame
@@ -43,33 +59,47 @@ public class TextClient : MonoBehaviour
         if (Physics.Raycast(ray, out hit)) { 
             if (Input.GetMouseButtonDown(0))
             {
-                if (hit.transform.name == "Client")
+                if (!EventSystem.current.IsPointerOverGameObject())
                 {
-                    changeZone();
-                    ampoule.SetActive(false);
-                }
-                
-                for(int i = 0; i < nbObjets; i++)
-                {
-                    if((objetChangemantText[i].transform.name == hit.transform.name) )
+                    if (hit.transform.name == "Client")
                     {
-                        Debug.Log("1");
-                        changeText();
-                    }
-                    if (objetChangemantText[i].transform.name == "index2" && objetChangemantText[i].activeSelf && !estPassé )
-                    {
-                        estPassé = true;
-                        changeText();
-                    }
+                        if (!premierTexteClient)
+                        {
+                            StartCoroutine(blablaClient());
+                            premierTexteClient = true;
+                        }
+                        else
+                        {
+                            changeZone();
+                            ampoule.SetActive(false);
+                        }
 
+                    }
+                    avancementScenario();
+
+                    for (int i = 0; i < nbObjets; i++)
+                    {
+                        if ((objetChangemantText[i].transform.name == hit.transform.name))
+                        {
+
+                            changeText();
+                        }
+                        if (objetChangemantText[i].transform.name == "index2" && objetChangemantText[i].activeSelf && !estPassé)
+                        {
+                            estPassé = true;
+                            changeText();
+                        }
+
+                    }
                 }
             }  
         }
-
+        
         if (textHasChanged())
         {
             ampoule.SetActive(true);
         }
+
     }
 
     public void changeZone()
@@ -104,18 +134,20 @@ public class TextClient : MonoBehaviour
 
     public void initTexts()
     {
-        texts[0] = " hello 1";
-        texts[1] = " hello 2";
-        texts[2] = " hello 3";
-        texts[3] = " hello 4";
-        texts[4] = " hello 5";
-        texts[5] = " hello 6";
-        texts[6] = " hello 7";
-        texts[7] = " hello 8";
-        texts[8] = " hello 9";
-        texts[9] = " hello 10";
-        texts[10] = " hello 11";
-        texts[11] = " hello 12";
+        texts[0] = "  Vous ne me serez surement d’aucune aide, comme toutes les personnes qui sont passées par ici avant vous… Mais bon, je peux toujours essayer.";
+        texts[1] = "  Je vous propose de m’aider à trouver quelqu’un que je cherche depuis longtemps. Si vous réussissez, je vous donnerai évidemment une récompense.";
+        texts[2] = "  Ma secrétaire vous fournira la liste des choses que j’attends de vous, mais vous feriez bien de m’écouter attentivement.";
+        texts[3] = "  Il y a quelques mois, un voleur est entré dans la taverne et m’a volé un trésor d’une valeur inestimable…";
+        texts[4] = "  Malheureusement je n’ai AUCUNE information sur l’identité de ce voleur.";
+        texts[5] = "  Afin de le retrouver j’aurais besoin que vous trouviez pour moi plusieurs renseignements essentiels qui permettront de déterminer son identité comme son âge, son sexe, son métier, ou encore son nom.";
+        texts[6] = "  Des éléments permettant de définir à quoi il ressemble physiquement comme sa taille, un accessoire caractéristique qu’il pourrait porter, ou encore la couleur de ses yeux et de ses cheveux pourraient également m’être utiles.";
+        texts[7] = "  Attention !!! je n’ai pas besoin d’informations inutiles comme sa boisson, son plat, ou son film préféré…";
+        texts[8] = " Je compte sur vous !Ah oui, j’oubliais, j’aurais aussi besoin de savoir à bord de quel véhicule il s’est enfui et vers quel pays il est allé.";
+        texts[9] = " Voilà, récupérez le papier écrit par ma secrétaire et vous pouvez commencer.Je compte sur vous !";
+        texts[10] = " Ah parfait ! Vous avez bien résumé la situation, c'est un bon début, " +
+                    " Maintenant, il va falloir s'organiser pour réaliser ces tâches au mieux, tenez ceci pourra vous être utile" +
+                    " (Vous êtes plus efficace que ma secrétaire, je ferais mieux d'engager isabelle wagner)";
+        texts[11] = "  Vos estimations de temps me conviennent, je vous laisse essayer de chercher le véhicule avec lequel le voleur s’est enfui, revenez me voir dès que vous pensez l’avoir trouvé !";
         texts[12] = " hello yolo";
         texts[13] = " hello 13";
         texts[14] = " hello 14";
@@ -136,5 +168,55 @@ public class TextClient : MonoBehaviour
         GameObject hints = GameObject.Find("Hints");
         GameObject hint = hints.transform.GetChild(1).gameObject;
         objetChangemantText[0] = hint;
+    }
+
+    IEnumerator blablaClient()
+    {
+        text.GetComponent<Text>().text = texts[0];
+        yield return new WaitForSeconds(10);
+
+        text.GetComponent<Text>().text = texts[1];
+        
+        yield return new WaitForSeconds(10);
+
+        text.GetComponent<Text>().text = texts[2];
+        yield return new WaitForSeconds(5);
+
+        text.GetComponent<Text>().text = texts[3];
+        yield return new WaitForSeconds(5);
+
+        text.GetComponent<Text>().text = texts[4];
+        yield return new WaitForSeconds(5);
+
+        text.GetComponent<Text>().text = texts[5];
+        yield return new WaitForSeconds(10);
+
+        text.GetComponent<Text>().text = texts[6];
+        yield return new WaitForSeconds(10);
+
+        text.GetComponent<Text>().text = texts[7];
+        yield return new WaitForSeconds(5);
+
+        text.GetComponent<Text>().text = texts[8];
+        yield return new WaitForSeconds(10);
+
+        text.GetComponent<Text>().text = texts[9];
+
+        yield return new WaitForSeconds(10);
+    }
+
+
+
+    public void avancementScenario()
+    {
+        
+        if (text.GetComponent<Text>().text == texts[9])
+        {
+            BLB.SetActive(true);
+        }
+        if (text.GetComponent<Text>().text == texts[11]) 
+        {
+            BookCars.GetComponent<BoxCollider>().enabled = true;
+        }
     }
 }

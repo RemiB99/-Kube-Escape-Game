@@ -159,7 +159,7 @@ public class PlanningPoker : MonoBehaviour
                 else if (image.name == "carte13")   somme += cartsValeur[4];  
             }
         }
-        if(somme <= 100 && somme >= 50)
+        if(somme <= 100 )
         {
             gagner = true;
         }
@@ -169,7 +169,7 @@ public class PlanningPoker : MonoBehaviour
     {
         if (gagner)
         {
-            /*
+            
             GameObject inv = GameObject.Find("Canvas");
             GameObject userStories = GameObject.Find("UserStoriesEvalues");
             GameObject slotHolder = GameObject.Find("Slot Holder");
@@ -190,7 +190,7 @@ public class PlanningPoker : MonoBehaviour
                     slot.SetActive(false);
                 }
             }
-            Destroy(enigme);*/
+            Destroy(enigme);
             Debug.Log("vous avez gagné");
         }
         else

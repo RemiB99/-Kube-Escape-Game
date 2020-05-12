@@ -74,7 +74,7 @@ public class RecueilBesoin : MonoBehaviour
         if (gagner)
         {
             GameObject inv = GameObject.Find("Canvas");
-            GameObject backLog = GameObject.Find("BackLog");
+            GameObject backLog = GameObject.Find("BackLogFinal");
             GameObject slotHolder = GameObject.Find("Slot Holder");
             GameObject slot, panel;
 
