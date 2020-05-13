@@ -35,6 +35,12 @@ public class ClickObject : MonoBehaviour
                         hit.transform.GetComponent<AudioSource>().Play();
                         SceneManager.LoadScene("the last revelation 1");
                     }
+                    else if(hit.transform.name == "PorteTaverne")
+                    {
+                        Debug.Log("bdsfljvkhbjclbdoshk bjqdv");
+                        hit.transform.GetComponent<AudioSource>().Play();
+                        SceneManager.LoadScene("PirateTavern");
+                    }
                     else if (hit.transform.name == "Enigma")
                     {
                         //SceneManager.LoadScene("qcm");

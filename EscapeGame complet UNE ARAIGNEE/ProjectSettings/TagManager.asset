@@ -9,6 +9,8 @@ TagManager:
   - Item
   - LinkObject
   - Contour
+  - Coin
+  - TextPlaque
   layers:
   - Default
   - TransparentFX
