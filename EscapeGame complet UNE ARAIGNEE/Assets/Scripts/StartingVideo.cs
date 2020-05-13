@@ -12,6 +12,8 @@ public class StartingVideo : MonoBehaviour
     void Start()
     {
         vid.loopPointReached += CheckOver;
+        PlayerPrefs.SetInt("Player Score", 0);
+        PlayerPrefs.Save();
     }
  
     void CheckOver(UnityEngine.Video.VideoPlayer vp)
