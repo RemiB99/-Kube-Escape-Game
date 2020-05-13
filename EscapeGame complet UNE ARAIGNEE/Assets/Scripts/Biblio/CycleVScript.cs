@@ -6,6 +6,7 @@ using TMPro;
 
 public class CycleVScript : MonoBehaviour
 {
+    
     public GameObject[] textsWall = new GameObject[5];
     public GameObject[] bookPlacés = new GameObject[5];
     private GameObject bouche;
@@ -23,6 +24,8 @@ public class CycleVScript : MonoBehaviour
         goodAnswer[4] = "Maintenance";
 
         bouche = GameObject.Find("Bouches");
+        PlayerPrefs.SetInt("Player Score", 1);
+        PlayerPrefs.Save();
     }
 
     // Update is called once per frame

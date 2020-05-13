@@ -41,6 +41,9 @@ public class WorldMap : MonoBehaviour
         boutonTrouver.GetComponent<Outline>().gameObject.SetActive(true);
         fleche.SetActive(true);
         message.SetActive(true);
+        GameObject client = GameObject.Find("Client");
+        client.GetComponent<TextClient>().finEnigmePays();
+
     }
 
     public void closed()

@@ -195,7 +195,7 @@ public class LinkObjects : MonoBehaviour
         if(objMain.name == "BackLogFinalMain")
         {
             GameObject client = GameObject.Find("Client");
-            client.GetComponent<TextClient>().changeText();
+            client.GetComponent<TextClient>().lanceExplications();
             GameObject inv = GameObject.Find("Canvas");
             GameObject planningPokerObjet = GameObject.Find("PlanningPokerObjet");
             Item ppo = planningPokerObjet.GetComponent<Item>();

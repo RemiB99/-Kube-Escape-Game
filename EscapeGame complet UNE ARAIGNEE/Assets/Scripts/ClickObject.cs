@@ -25,7 +25,7 @@ public class ClickObject : MonoBehaviour
                 
                 if (Input.GetMouseButtonDown(0) /*|| touch.tapCount == 2*/ )
                 {
-                
+                    Debug.Log(hit.transform.name);
                     if (hit.transform.name == "Cube Test")
                     {
                         SceneManager.LoadScene("Terminal Hacker 1");
@@ -41,6 +41,11 @@ public class ClickObject : MonoBehaviour
                         hit.transform.GetComponent<AudioSource>().Play();
                         SceneManager.LoadScene("PirateTavern");
                     }
+                    else if(hit.transform.name == "TavernDoor")
+                    {
+                        
+                        SceneManager.LoadScene("Start Scene");
+                    }
                     else if (hit.transform.name == "Enigma")
                     {
                         //SceneManager.LoadScene("qcm");
@@ -52,6 +57,7 @@ public class ClickObject : MonoBehaviour
                     else if (hit.transform.name == "door")
                     {
                         SceneManager.LoadScene("Start scene");
+
                     }
                     else if (hit.transform.name == "Black Cube")
                     {  

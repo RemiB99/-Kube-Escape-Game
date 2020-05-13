@@ -8,10 +8,13 @@ public class PlaqueScript : MonoBehaviour
 {
     private bool isRayed = false;
     public GameObject[] textsPlaques = new GameObject[8];
+    private bool[] boolPlaques = new bool[8];
+    private bool fin = false;
     // Start is called before the first frame update
     void Start()
     {
-        
+        PlayerPrefs.SetInt("Player Score", 2);
+        PlayerPrefs.Save();
     }
 
     // Update is called once per frame
@@ -35,5 +38,28 @@ public class PlaqueScript : MonoBehaviour
                 }
             }
         }
+
+        if(finEnigme() && !fin){
+            actionsFinEnigme();
+            fin = true;
+        }
+    }
+
+    public void actionsFinEnigme(){
+        GameObject client = GameObject.Find("Client");
+        client.GetComponent<TextClient>().finEnigmePlaque();
+    }
+
+    public bool finEnigme(){
+        bool res = true;
+        for(int i =0;i<textsPlaques.Length-1;i++){
+            if(!textsPlaques[i].transform.GetChild(0).gameObject.activeSelf)
+                res = false;
+        }
+        return res;
+        /*GameObject bonnePlaque = GameObject.Find("TextPrepa");
+        if(bonnePlaque.transform.GetChild(0).gameObject.activeSelf)
+            return true;
+        return false;*/
     }
 }

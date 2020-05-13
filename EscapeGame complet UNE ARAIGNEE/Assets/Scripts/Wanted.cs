@@ -91,7 +91,9 @@ public class Wanted : MonoBehaviour
     {
         if (gagner)
         {
-            Debug.Log("vous avez gagné");
+            Debug.Log("vous avez gagné WANTEEED");
+            GameObject client = GameObject.Find("Client");
+            client.GetComponent<TextClient>().finEnigmeNom();
         }
         else
         {

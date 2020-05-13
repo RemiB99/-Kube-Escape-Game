@@ -19,6 +19,7 @@ public class TextClient : MonoBehaviour
     private int nbObjets = 1;
     private bool estPassé;
     private bool premierTexteClient;
+    private bool enigmePays, enigmeNom, enigmePlaque, hasPassed,finifini;
 
     // varialbes déroulement du scénario//
     private GameObject map ;
@@ -38,7 +39,12 @@ public class TextClient : MonoBehaviour
         //ampoule.SetActive(false);
         zoneActive = false;
         estPassé = false;
+        enigmePays = false;
+        enigmeNom = false;
+        enigmePlaque = false;
         premierTexteClient = false;
+        hasPassed = false;
+        finifini = false;
 
         // initialisation des variables déroulement du scénario //
         map = GameObject.Find("WorldMap");
@@ -46,13 +52,19 @@ public class TextClient : MonoBehaviour
         BookCars = GameObject.Find("BookEnigme");
         
         BLB.SetActive(false);
-        map.GetComponent<BoxCollider>().enabled = false;
+        map.GetComponent<BoxCollider>().enabled = true;
         BookCars.GetComponent<BoxCollider>().enabled = false;
     }
 
     // Update is called once per frame
     void Update()
     {
+        
+        if(finTroisTaches() && !finifini){
+            blablaFin();
+            finifini = true;
+        }
+
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
         
@@ -65,6 +77,7 @@ public class TextClient : MonoBehaviour
                     {
                         if (!premierTexteClient)
                         {
+                            
                             StartCoroutine(blablaClient());
                             premierTexteClient = true;
                         }
@@ -87,8 +100,9 @@ public class TextClient : MonoBehaviour
                         if (objetChangemantText[i].transform.name == "index2" && objetChangemantText[i].activeSelf && !estPassé)
                         {
                             estPassé = true;
-                            changeText();
+                            chgmtEnigmeNom();
                         }
+                    
 
                     }
                 }
@@ -145,19 +159,29 @@ public class TextClient : MonoBehaviour
         texts[8] = " Je compte sur vous !Ah oui, j’oubliais, j’aurais aussi besoin de savoir à bord de quel véhicule il s’est enfui et vers quel pays il est allé.";
         texts[9] = " Voilà, récupérez le papier écrit par ma secrétaire et vous pouvez commencer.Je compte sur vous !";
         texts[10] = " Ah parfait ! Vous avez bien résumé la situation, c'est un bon début, " +
-                    " Maintenant, il va falloir s'organiser pour réaliser ces tâches au mieux, tenez ceci pourra vous être utile" +
-                    " (Vous êtes plus efficace que ma secrétaire, je ferais mieux d'engager isabelle wagner)";
-        texts[11] = "  Vos estimations de temps me conviennent, je vous laisse essayer de chercher le véhicule avec lequel le voleur s’est enfui, revenez me voir dès que vous pensez l’avoir trouvé !";
-        texts[12] = " hello yolo";
-        texts[13] = " hello 13";
-        texts[14] = " hello 14";
-        texts[15] = " hello 15";
-        texts[16] = " hello 16";
-        texts[17] = " hello 17";
-        texts[18] = " hello 18";
-        texts[19] = " hello 19";
-        texts[20] = " hello 20";
-        texts[21] = " hello 21";
+                    " Maintenant, il va falloir s'organiser pour réaliser ces tâches au mieux, je vais vous les expliquer plus en détail";
+                    
+        texts[11] = " Je veux tout d'abord que vous me trouviez le sexe de l'individu" +
+                    "Pour cela, vous devriez fouillez l'endroit, des notes pourraient vous donner des informations";
+        texts[12] = " Ensuite, j'ai besoin de connaître le pays vers lequel il s'est enfui" +
+                    " Ma secrétaire à déja commencé l'enquête à ce sujet, elle a laissé ses notes sur un tableau quelque part";
+        texts[13] = " Enfin, pour le retrouver au plus vite, il nous faut l'immatriculation de son véhicule" +
+                    " La liste est déja réduite à une dizaine de plaques, mais il faut encore l'affiner";
+        texts[14] = " Voila, vous savez tout, à vous de vous organisez maintenant au mieux. Prenez ceci, cela vous aidera"+
+                    " Bon courage, je vous tiens au courant de tout changement...";
+        texts[15] = " Parfait, votre organisation me convient, il est maintenant temps d'agir"+
+                    " Faîtes au plus vite, la pièce contient tout ce dont vous aurez besoin";
+        texts[16] = " Ah, le Congo, nous n'étions pas partis sur cette piste, bien joué";
+        texts[17] = " Bien, nous connaissons maintenant la plaque d'immatriculation du véhicule qu'il a utilisé"+
+                    " C'est un pas de plus vers la découverte de ce criminel";
+        texts[18] = " Finalement, j'aurais besoin non seulement de son sexe, mais aussi de son nom"+
+                    " J'imagine que cela reste à votre portée...";
+        texts[19] = " SkullBen vous dites ? Excellent, nous tenons notre homme. Avec les autres informations"+
+                    " nous aurons tout ce qu'il nous faut pour retrouver cette crapule !!";
+        texts[20] = " Et bien, il semblerait que vous ayez réuni toutes les informations demandées"+
+                    " je suis satisfait de votre travail. Merci beaucoup !";
+        texts[21] = " Il ne vous reste plus qu'à découvrir si vous avez été suffisement efficaces."+
+                    "Passez la porte pour connaître la réponse...";
         texts[22] = " hello 22";
         texts[23] = " hello 23";
         texts[24] = " hello 24";
@@ -189,20 +213,111 @@ public class TextClient : MonoBehaviour
         yield return new WaitForSeconds(5);
 
         text.GetComponent<Text>().text = texts[5];
-        yield return new WaitForSeconds(10);
+        yield return new WaitForSeconds(5);
 
         text.GetComponent<Text>().text = texts[6];
-        yield return new WaitForSeconds(10);
+        yield return new WaitForSeconds(5);
 
         text.GetComponent<Text>().text = texts[7];
         yield return new WaitForSeconds(5);
 
         text.GetComponent<Text>().text = texts[8];
-        yield return new WaitForSeconds(10);
+        yield return new WaitForSeconds(5);
 
         text.GetComponent<Text>().text = texts[9];
 
+        yield return new WaitForSeconds(5);
+    }
+
+    public void lanceExplications(){
+        StartCoroutine(explicTaches());
+    }
+
+    IEnumerator explicTaches()
+    {
+        text.GetComponent<Text>().text = texts[10];
         yield return new WaitForSeconds(10);
+
+        text.GetComponent<Text>().text = texts[11];
+        
+        yield return new WaitForSeconds(5);
+
+        text.GetComponent<Text>().text = texts[12];
+        yield return new WaitForSeconds(5);
+
+        text.GetComponent<Text>().text = texts[13];
+        yield return new WaitForSeconds(5);
+
+        text.GetComponent<Text>().text = texts[14];
+        yield return new WaitForSeconds(5);
+    }
+
+    IEnumerator textEnigmePays()
+    {
+        text.GetComponent<Text>().text = texts[16];
+        yield return new WaitForSeconds(10);
+
+    }
+
+    IEnumerator textEnigmeNom()
+    {
+        text.GetComponent<Text>().text = texts[19];
+        yield return new WaitForSeconds(10);
+
+    }
+
+    IEnumerator textEnigmePlaque()
+    {
+        text.GetComponent<Text>().text = texts[17];
+        yield return new WaitForSeconds(10);
+
+    }
+
+    IEnumerator textEnigmeSexe()
+    {
+        text.GetComponent<Text>().text = texts[18];
+        yield return new WaitForSeconds(10);
+
+    }
+
+    IEnumerator textFinal()
+    {
+        
+        yield return new WaitForSeconds(10);
+        text.GetComponent<Text>().text = texts[20];
+        yield return new WaitForSeconds(1);
+        text.GetComponent<Text>().text = texts[21];
+
+    }
+
+    public void finEnigmePays(){
+        Debug.Log("pays");
+        enigmePays = true;
+            StartCoroutine(textEnigmePays());
+    }
+
+    public void finEnigmePlaque(){
+        Debug.Log("plaques");
+        enigmePlaque = true;
+            StartCoroutine(textEnigmePlaque());
+    }
+
+    public void finEnigmeNom(){
+        Debug.Log("noms");
+        enigmeNom = true;
+            StartCoroutine(textEnigmeNom());
+    }
+
+    public void chgmtEnigmeNom(){
+            StartCoroutine(textEnigmeSexe());
+    }
+
+    public bool finTroisTaches(){
+        return enigmePlaque && enigmePays && enigmeNom;
+    }
+
+    public void blablaFin(){
+            StartCoroutine(textFinal());
     }
 
 
@@ -210,13 +325,15 @@ public class TextClient : MonoBehaviour
     public void avancementScenario()
     {
         
-        if (text.GetComponent<Text>().text == texts[9])
+        if (text.GetComponent<Text>().text == texts[9] && !hasPassed)
         {
             BLB.SetActive(true);
+            hasPassed = true;
         }
-        if (text.GetComponent<Text>().text == texts[11]) 
+        if (text.GetComponent<Text>().text == texts[15]) 
         {
             BookCars.GetComponent<BoxCollider>().enabled = true;
+            map.GetComponent<BoxCollider>().enabled = true;
         }
     }
 }
