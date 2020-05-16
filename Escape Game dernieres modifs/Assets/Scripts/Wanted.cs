@@ -11,12 +11,14 @@ public class Wanted : MonoBehaviour
     private bool[] buttonsBool;
     private int nbButtons;
     private bool gagner;
+    private GameObject noticBoard;
     void Start()
     {
         nbButtons = 7;
         buttons = new GameObject[nbButtons];
         buttonsBool = new bool[nbButtons];
         GameObject en = enigme.transform.GetChild(0).gameObject;
+        noticBoard = GameObject.Find("WantedPosters");
 
         for (int i = 0; i < nbButtons; i++)
         {
@@ -67,11 +69,14 @@ public class Wanted : MonoBehaviour
         {
             buttonsBool[indice] = false;
             buttons[indice].transform.GetChild(0).gameObject.SetActive(true);
+            noticBoard.transform.GetChild(indice).gameObject.SetActive(false);
+
         }
         else
         {
             buttonsBool[indice] = true;
             buttons[indice].transform.GetChild(0).gameObject.SetActive(false);
+            noticBoard.transform.GetChild(indice).gameObject.SetActive(true);
         }
     }
 

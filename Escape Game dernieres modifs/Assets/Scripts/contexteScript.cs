@@ -44,7 +44,7 @@ public class contexteScript : MonoBehaviour
 
     IEnumerator blablaBouche1(){
         bouche.GetComponent<Bouches>().animBoucheContente();
-        bouche.GetComponent<Bouches>().setText("Ah, vous voila reveillé, je me suis inquiété..."
+        bouche.GetComponent<Bouches>().setText("Ah, vous voilà reveillé, je me suis inquiété..."
                                                 + " Je suis Pierrot, je vais vous guider dans cette aventure ");
         yield return new WaitForSeconds(7);
         bouche.GetComponent<Bouches>().animBoucheReflechi();
@@ -52,66 +52,67 @@ public class contexteScript : MonoBehaviour
                                                 +" de la gestion de projet vivaient ici il y a des années");
         yield return new WaitForSeconds(7);
         bouche.GetComponent<Bouches>().animBoucheReflechi();
-        bouche.GetComponent<Bouches>().setText("Je vous propose de partir sur leurs traces, pour acquérir leurs connaissances. "
-                                                + " Commençons par cette maison 'Bibliothèque', ce sera notre première étape");
+        bouche.GetComponent<Bouches>().setText("Je vous propose de partir sur leurs traces pour acquérir leurs connaissances." +
+                                                " Commençons par nous rendre dans la « Bibliothèque »");
         
     }
 
     IEnumerator blablaBouche2(){
         bouche.GetComponent<Bouches>().animBoucheTriste();
-        bouche.GetComponent<Bouches>().setText("Bon, nous avons appris des choses mais nous finissons sur un échec."
-                                                + "Essayons d'en tirer les bonnes conclusions");
+        bouche.GetComponent<Bouches>().setText("Bon, essayons de tirer les bonnes conclusions de notre échec." +
+                                                " Je pense que nous aurions dû un peu plus réfléchir à ce que le client demandait…");
         yield return new WaitForSeconds(7);
         bouche.GetComponent<Bouches>().animBoucheReflechi();
-        bouche.GetComponent<Bouches>().setText("Je pense que nous aurions dû un peu plus réfléchir à ce que ce client demandait..."
-                                                +"C'est la première erreur que nous avons faite");
+        bouche.GetComponent<Bouches>().setText("Nous nous sommes précipités dans sa mission sans nous mettre d’accord." +
+                                                " Peut-être qu’en ayant parlé plus au client plus régulièrement…");
         yield return new WaitForSeconds(7);
         bouche.GetComponent<Bouches>().animBoucheReflechi();
-        bouche.GetComponent<Bouches>().setText("Nous nous sommes aussi très vite précipités dans sa mission sans nous mettre d'accord"
-                                                +"J'avoue que je me suis un peu placé en chef sur le coup...");
+        bouche.GetComponent<Bouches>().setText("Enfin bref, tout cela me rappelle une autre méthode que ces sorciers ont inventé pour pallier ces problèmes.");
+
         yield return new WaitForSeconds(7);
         bouche.GetComponent<Bouches>().animBoucheReflechi();
-        bouche.GetComponent<Bouches>().setText("Et puis, il aurait peut-être  été judicieux de confirmer que nous étions sur la bonne voie"
-                                                +"Peut-être qu'en  ayant parlé au client plus régulièrement...");
-        yield return new WaitForSeconds(7);
+        bouche.GetComponent<Bouches>().setText("Continuons notre aventure, nous avons pleins d’autres choses à découvrir." +
+                                                " Allons vers la « Taverne », un peu de détente ne fera pas de mal.");
+        /*yield return new WaitForSeconds(7);
         bouche.GetComponent<Bouches>().animBoucheContente();
         bouche.GetComponent<Bouches>().setText("Enfin bref, tout cela me rapelle une autre méthode que ces sorciers ont inventé"
                                                 +"pour palier à ces problèmes...");
         yield return new WaitForSeconds(7);
         bouche.GetComponent<Bouches>().animBoucheContente();
         bouche.GetComponent<Bouches>().setText("Continuons notre aventure, nous avons pleins d'autres choses à découvrir"
-                                                +"Allons vers cet autre bâtiment 'Taverne', un peu de détente ne fait pas de mal");
+                                                +"Allons vers cet autre bâtiment 'Taverne', un peu de détente ne fait pas de mal");*/
         
     }
 
     IEnumerator blablaBouche3(){
         bouche.GetComponent<Bouches>().animBoucheContente();
-        bouche.GetComponent<Bouches>().setText("Ah, nous voila de retour à l'éxtérieur, il faut dire que cette "
-                                                + " mission n'était pas de tout repos...");
+        bouche.GetComponent<Bouches>().setText("Ah, nous voilà de retour à l’extérieur." +
+                                                " Il faut dire que cette mission n’était pas de tout repos… Faisons un bilan de ce que nous avons appris.");
         yield return new WaitForSeconds(7);
         bouche.GetComponent<Bouches>().animBoucheContente();
-        bouche.GetComponent<Bouches>().setText("Mais au moins, elle aura été très instructive "
-                                                +" Faisons un bilan de ce que nous avons appris...");
+        bouche.GetComponent<Bouches>().setText("Déjà nous avons bien fait d’écouter en détails cette cliente." +
+                                                " Il était important de bien comprendre ce dont elle avait besoin.");
         yield return new WaitForSeconds(7);
         bouche.GetComponent<Bouches>().animBoucheContente();
-        bouche.GetComponent<Bouches>().setText("Déja nous avons bien fait d'écouter en détails ce client"
-                                                +"Il est important de bien savoir ce dont il a besoin");
+        bouche.GetComponent<Bouches>().setText("Je pense également que de rester en contact avec cette cliente régulièrement était une très bonne chose.");
+
         yield return new WaitForSeconds(7);
         bouche.GetComponent<Bouches>().animBoucheReflechi();
-        bouche.GetComponent<Bouches>().setText("Ensuite, le choix des tâches qu'il nous à confiées était mieux organisé. "
-                                                +" Il est bien d'avoir une idée à l'avance de l'importance des tâches à effectuer...");
+        bouche.GetComponent<Bouches>().setText("Nous avons pu être au courant de ses changements d’avis et être sûrs de faire ce qu’elle voulait au final.");
+
         yield return new WaitForSeconds(7);
         bouche.GetComponent<Bouches>().animBoucheContente();
-        bouche.GetComponent<Bouches>().setText("Et surtout que tout le monde soit d'accord !");
+        bouche.GetComponent<Bouches>().setText("Bon, le moment que je redoutais est arrivé. Je crois bien qu’il est temps pour nous de nous quitter :( ");
+
         yield return new WaitForSeconds(7);
         bouche.GetComponent<Bouches>().animBoucheContente();
-        bouche.GetComponent<Bouches>().setText("Enfin, je pense que de rester en contact avec ce client régulièrement"
-                                                + " était une très bonne chose.");
+        bouche.GetComponent<Bouches>().setText("Mais avant ça, j’ai une récompense pour vous ! J’ai pris note de vos performances, et vous ai attribué un score");
+
         yield return new WaitForSeconds(7);
         bouche.GetComponent<Bouches>().animBoucheContente();
-        bouche.GetComponent<Bouches>().setText("Nous avons pû être au courant de ses changements d'avis et être"
-                                                + " surs de faire ce qu'il voulait au final");
-        yield return new WaitForSeconds(7);
+        bouche.GetComponent<Bouches>().setText("Mais avant ça, j’ai une récompense pour vous ! J’ai pris note de vos performances, et vous ai attribué un score");
+
+       /* yield return new WaitForSeconds(7);
         bouche.GetComponent<Bouches>().animBoucheTriste();
         bouche.GetComponent<Bouches>().setText("Bon , le moment que je redoutais est arrivé"
                                                 + " Je crois bien qu'il est temps pour nous de nous quitter :( ");
@@ -122,7 +123,7 @@ public class contexteScript : MonoBehaviour
         yield return new WaitForSeconds(7);
         bouche.GetComponent<Bouches>().animBoucheContente();
         bouche.GetComponent<Bouches>().setText("Votre trophée vous attend !"
-                                                + "J'espère vous revoir bientôt, à la prochaine !!");
+                                                + "J'espère vous revoir bientôt, à la prochaine !!");*/
         // TRUC DE ROBIN WAGNER A METTRE ICI ET PAS A UN AUTRE ENDROIT C'EST COMPRIS ?????
         yield return new WaitForSeconds(7);
         GameObject Fin = GameObject.Find("Fin");

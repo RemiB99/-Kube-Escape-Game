@@ -11,6 +11,7 @@ public class Bouches : MonoBehaviour
     public GameObject boucheReflechi;
     public GameObject boucheFache;
     public GameObject textBouche;
+    public GameObject backgroundTextBouches;
 
     public Button boutonBouche;
 
@@ -60,12 +61,14 @@ public class Bouches : MonoBehaviour
         boucheReflechi.SetActive(false);
         boucheFache.SetActive(false);
         textBouche.SetActive(false);
+        backgroundTextBouches.SetActive(false);
     }
 
     public void animBoucheContente(){
         desactiveBouche();
         boucheContente.SetActive(true);
         textBouche.SetActive(true);
+        backgroundTextBouches.SetActive(true);
         //textBouche.GetComponent<Animator>().SetTrigger("Text");
         Animator animateur = boucheContente.GetComponent<Animator>();
         animateur.SetTrigger("Content");
@@ -75,6 +78,7 @@ public class Bouches : MonoBehaviour
         desactiveBouche();
         boucheTriste.SetActive(true);
         textBouche.SetActive(true);
+        backgroundTextBouches.SetActive(true);
         //textBouche.GetComponent<Animator>().SetTrigger("Text");
         Animator animateur = boucheTriste.GetComponent<Animator>();
         animateur.SetTrigger("Triste");
@@ -84,6 +88,7 @@ public class Bouches : MonoBehaviour
         desactiveBouche();
         boucheReflechi.SetActive(true);
         textBouche.SetActive(true);
+        backgroundTextBouches.SetActive(true);
         //textBouche.GetComponent<Animator>().SetTrigger("Text");
         Animator animateur = boucheReflechi.GetComponent<Animator>();
         animateur.SetTrigger("Reflechi");
@@ -93,6 +98,7 @@ public class Bouches : MonoBehaviour
         desactiveBouche();
         boucheFache.SetActive(true);
         textBouche.SetActive(true);
+        backgroundTextBouches.SetActive(true);
         //textBouche.GetComponent<Animator>().SetTrigger("Text");
         Animator animateur = boucheFache.GetComponent<Animator>();
         animateur.SetTrigger("Fache");
@@ -101,10 +107,12 @@ public class Bouches : MonoBehaviour
     public void modifText(){
         if(textVisible){
             textBouche.SetActive(false);
+            backgroundTextBouches.SetActive(false);
         }
         else
         {
             textBouche.SetActive(true);
+            backgroundTextBouches.SetActive(true);
         }
         textVisible = !textVisible;
     }

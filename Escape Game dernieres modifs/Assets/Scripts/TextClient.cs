@@ -150,40 +150,39 @@ public class TextClient : MonoBehaviour
     {
         texts[0] = "  Vous ne me serez surement d’aucune aide, comme toutes les personnes qui sont passées par ici avant vous… Mais bon, je peux toujours essayer.";
         texts[1] = "  Je vous propose de m’aider à trouver quelqu’un que je cherche depuis longtemps. Si vous réussissez, je vous donnerai évidemment une récompense.";
-        texts[2] = "  Ma secrétaire vous fournira la liste des choses que j’attends de vous, mais vous feriez bien de m’écouter attentivement.";
+        texts[2] = "  Mon assistant vous fournira la liste des choses que j’attends de vous, mais vous feriez bien de m’écouter attentivement..";
         texts[3] = "  Il y a quelques mois, un voleur est entré dans la taverne et m’a volé un trésor d’une valeur inestimable…";
         texts[4] = "  Malheureusement je n’ai AUCUNE information sur l’identité de ce voleur.";
         texts[5] = "  Afin de le retrouver j’aurais besoin que vous trouviez pour moi plusieurs renseignements essentiels qui permettront de déterminer son identité comme son âge, son sexe, son métier, ou encore son nom.";
         texts[6] = "  Des éléments permettant de définir à quoi il ressemble physiquement comme sa taille, un accessoire caractéristique qu’il pourrait porter, ou encore la couleur de ses yeux et de ses cheveux pourraient également m’être utiles.";
         texts[7] = "  Attention !!! je n’ai pas besoin d’informations inutiles comme sa boisson, son plat, ou son film préféré…";
-        texts[8] = " Je compte sur vous !Ah oui, j’oubliais, j’aurais aussi besoin de savoir à bord de quel véhicule il s’est enfui et vers quel pays il est allé.";
-        texts[9] = " Voilà, récupérez le papier écrit par ma secrétaire et vous pouvez commencer.Je compte sur vous !";
-        texts[10] = " Ah parfait ! Vous avez bien résumé la situation, c'est un bon début, " +
-                    " Maintenant, il va falloir s'organiser pour réaliser ces tâches au mieux, je vais vous les expliquer plus en détail";
-                    
-        texts[11] = " Je veux tout d'abord que vous me trouviez le sexe de l'individu" +
-                    "Pour cela, vous devriez fouillez l'endroit, des notes pourraient vous donner des informations";
-        texts[12] = " Ensuite, j'ai besoin de connaître le pays vers lequel il s'est enfui" +
+        texts[8] = "  Je compte sur vous !Ah oui, j’oubliais, j’aurais aussi besoin de savoir à bord de quel véhicule il s’est enfui et vers quel pays il est allé.";
+        texts[9] = "  Voilà, récupérez le papier écrit par mon assistant et vous pouvez commencer. Je compte sur vous !";
+        texts[10] = " Comment ça 10 tâches c’est trop pour vous ?! Vous avez peut-être raison…" +
+                    " C’est peut-être pour ça que personne n’a réussi avant… Je vais vous proposer de se concentrer sur 3 de ces tâches.";
+        texts[11] = " La première tâche consiste à trouver le sexe du voleur. Pour cela, vous devriez fouillez la taverne. Des parchemins pourraient vous être utiles…" +
+                    " Revenez me voir quand vous l’aurez trouvé.";
+        /*texts[12] = " Ensuite, j'ai besoin de connaître le pays vers lequel il s'est enfui" +
                     " Ma secrétaire à déja commencé l'enquête à ce sujet, elle a laissé ses notes sur un tableau quelque part";
         texts[13] = " Enfin, pour le retrouver au plus vite, il nous faut l'immatriculation de son véhicule" +
                     " La liste est déja réduite à une dizaine de plaques, mais il faut encore l'affiner";
         texts[14] = " Voila, vous savez tout, à vous de vous organisez maintenant au mieux. Prenez ceci, cela vous aidera"+
-                    " Bon courage, je vous tiens au courant de tout changement...";
-        texts[15] = " Parfait, votre organisation me convient, il est maintenant temps d'agir"+
-                    " Faîtes au plus vite, la pièce contient tout ce dont vous aurez besoin";
-        texts[16] = " Ah, le Congo, nous n'étions pas partis sur cette piste, bien joué";
-        texts[17] = " Bien, nous connaissons maintenant la plaque d'immatriculation du véhicule qu'il a utilisé"+
-                    " C'est un pas de plus vers la découverte de ce criminel";
-        texts[18] = " Finalement, j'aurais besoin non seulement de son sexe, mais aussi de son nom"+
-                    " J'imagine que cela reste à votre portée...";
-        texts[19] = " SkullBen vous dites ? Excellent, nous tenons notre homme. Avec les autres informations"+
-                    " nous aurons tout ce qu'il nous faut pour retrouver cette crapule !!";
-        texts[20] = " Et bien, il semblerait que vous ayez réuni toutes les informations demandées"+
-                    " je suis satisfait de votre travail. Merci beaucoup !";
-        texts[21] = " Il ne vous reste plus qu'à découvrir si vous avez été suffisement efficaces."+
-                    "Passez la porte pour connaître la réponse...";
-        texts[22] = " hello 22";
-        texts[23] = " hello 23";
+                    " Bon courage, je vous tiens au courant de tout changement...";*/
+        /*texts[15] = " Parfait, votre organisation me convient, il est maintenant temps d'agir"+
+                    " Faîtes au plus vite, la pièce contient tout ce dont vous aurez besoin";*/
+        texts[16] = " Finalement, j’aurais besoin non seulement de son sexe, mais également de son nom. J’imagine que cela ne vous pose pas de problème…";
+        texts[17] = " SkullBen vous dites ? Excellent, nous tenons notre homme. Avec les autres informations, nous aurons tout ce qu’il nous faut pour retrouver cette crapule !";
+        texts[18] = " J’aurais maintenant besoin de connaître le pays vers lequel il s’est enfui. Mon assistant a déjà commencé l’enquête à ce sujet." +
+                    " Il a laissé ses notes sur un tableau quelque part… Sélectionner le pays sur la carte quand vous pensez l’avoir trouvé.";
+        texts[19] = " Ah, le Congo, nous n’étions pas partis sur cette piste, bien joué !";
+        texts[20] = " Enfin, pour le retrouver au plus vite, il nous faut l’immatriculation de son véhicule." +
+                    " La liste est déjà réduite à une dizaine de plaques, mais il faut encore l’affiner." +
+                    " Vous trouverez tout le nécessaire pour le faire dans la pièce située à l’arrière de la taverne.";
+        texts[21] = " Bien, nous connaissons maintenant la plaque d’immatriculation du véhicule que le voleur a utilisé." +
+                    " C’est un pas de plus vers la découverte de ce criminel.";
+        texts[22] = " Et bien, il semblerait que vous ayez réuni toutes les informations demandées je suis satisfait de votre travail." +
+                    " Merci beaucoup !";
+        texts[23] = " Il ne vous reste plus qu’à découvrir si vous avez été suffisamment efficaces. Poussez la porte pour connaître la réponse…";
         texts[24] = " hello 24";
     }
 
@@ -242,40 +241,37 @@ public class TextClient : MonoBehaviour
         
         yield return new WaitForSeconds(5);
 
-        text.GetComponent<Text>().text = texts[12];
-        yield return new WaitForSeconds(5);
-
-        text.GetComponent<Text>().text = texts[13];
-        yield return new WaitForSeconds(5);
-
-        text.GetComponent<Text>().text = texts[14];
-        yield return new WaitForSeconds(5);
     }
 
     IEnumerator textEnigmePays()
     {
-        text.GetComponent<Text>().text = texts[16];
+        text.GetComponent<Text>().text = texts[19];
         yield return new WaitForSeconds(10);
 
+        text.GetComponent<Text>().text = texts[20];
+        yield return new WaitForSeconds(10);
     }
 
     IEnumerator textEnigmeNom()
     {
-        text.GetComponent<Text>().text = texts[19];
+        text.GetComponent<Text>().text = texts[17];
         yield return new WaitForSeconds(10);
+
+        text.GetComponent<Text>().text = texts[18];
+        
 
     }
 
     IEnumerator textEnigmePlaque()
     {
-        text.GetComponent<Text>().text = texts[17];
+        text.GetComponent<Text>().text = texts[21];
         yield return new WaitForSeconds(10);
 
     }
 
     IEnumerator textEnigmeSexe()
     {
-        text.GetComponent<Text>().text = texts[18];
+        text.GetComponent<Text>().text = texts[16];
         yield return new WaitForSeconds(10);
 
     }
@@ -284,9 +280,9 @@ public class TextClient : MonoBehaviour
     {
         
         yield return new WaitForSeconds(10);
-        text.GetComponent<Text>().text = texts[20];
-        yield return new WaitForSeconds(1);
-        text.GetComponent<Text>().text = texts[21];
+        text.GetComponent<Text>().text = texts[22];
+        yield return new WaitForSeconds(3);
+        text.GetComponent<Text>().text = texts[23];
 
     }
 

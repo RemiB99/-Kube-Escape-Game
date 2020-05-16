@@ -175,7 +175,7 @@ public class EnigmePotionPanel : MonoBehaviour
                 break;
             case 5:
                 bouche.GetComponent<Bouches>().animBoucheContente();
-                bouche.GetComponent<Bouches>().setText("Plus qu'une ! Vous avez sûrement devinés laquelle...");
+                bouche.GetComponent<Bouches>().setText("Plus qu'une ! Vous avez sûrement deviné laquelle...");
                 break;
             default:
                 bouche.GetComponent<Bouches>().animBoucheContente();

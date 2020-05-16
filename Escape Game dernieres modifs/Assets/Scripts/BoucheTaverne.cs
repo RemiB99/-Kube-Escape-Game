@@ -36,7 +36,7 @@ public class BoucheTaverne : MonoBehaviour
     public void initTextes()
     {
         textes[0] = "Vous voici arrivé dans ce monde dont on m’a tant parlé …";
-        textes[1] = "L’ampoule en haut à droite symbolise que le client souhaite vous parler. Allez le voir si vous avez un moment. ";
+        textes[1] = "L’ampoule en haut à droite symbolise que la cliente souhaite vous parler. Allez la voir si vous avez un moment. ";
         textes[2] = " ";
         textes[3] = " ";
         textes[4] = " ";

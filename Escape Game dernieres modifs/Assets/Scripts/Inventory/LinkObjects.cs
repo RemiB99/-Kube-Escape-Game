@@ -207,18 +207,18 @@ public class LinkObjects : MonoBehaviour
             GameObject planningPokerObjet = GameObject.Find("PlanningPokerObjet");
             Item ppo = planningPokerObjet.GetComponent<Item>();
 
-            objetCliqué.GetComponent<LinkObjects>().id = 53;
-            inv.GetComponent<Inventory>().AddItem(planningPokerObjet, ppo.id, ppo.type, ppo.description, ppo.icon, ppo.use);
+           /* objetCliqué.GetComponent<LinkObjects>().id = 53;
+            inv.GetComponent<Inventory>().AddItem(planningPokerObjet, ppo.id, ppo.type, ppo.description, ppo.icon, ppo.use);*/
 
             
         }
 
-        if (objMain.name == "UserStoriesEvaluesMain")
+       /* if (objMain.name == "UserStoriesEvaluesMain")
         {
             GameObject client = GameObject.Find("Client");
             client.GetComponent<TextClient>().changeText();
             
-        }
+        }*/
 
         
     }
